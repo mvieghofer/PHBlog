@@ -1,0 +1,50 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(200, 200, 200);
+    padding: 0;
+    margin: 0;
+}
+
+footer {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    bottom: 0;
+}
+
+header {
+    display: block;
+    position: relative;
+    height: auto;
+    width: 100%;
+    padding-bottom: 25px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+
+nav {
+    min-width: 100px;
+}
+
+table {
+    width: 100%;
+}
+
+td#nav {
+    width: 20%;
+}
+
+#content {
+    padding-bottom: 25px;
+    padding-top:25px;
+    padding-left: 25px;
+}
+
+article {
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+}
