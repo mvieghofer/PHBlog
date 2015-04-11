@@ -10,6 +10,8 @@
 <body>
     <header>
         <h1>PHBlog</h1>
+        
+        <a href='dashboard.php'>dashboard</a>
     </header>
     <table>
       <tr>
