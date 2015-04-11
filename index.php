@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>My first PHP project</h1>
+        <h1>PHBlog</h1>
     </header>
     <table>
       <tr>
