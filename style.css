@@ -28,6 +28,8 @@ header {
 
 nav {
     min-width: 100px;
+    position: absolute;
+    top: 0;
 }
 
 table {
@@ -36,6 +38,7 @@ table {
 
 td#nav {
     width: 20%;
+    position: relative;
 }
 
 #content {
