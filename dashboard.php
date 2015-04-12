@@ -28,6 +28,7 @@
     </header>
     <div>
         <?php
+            require("db.php");
             require("article.php");
     
             $articles = getArticles();
