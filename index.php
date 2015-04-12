@@ -10,14 +10,7 @@
 <body>
     <header>
         <h1>PHBlog</h1>
-        <?php
-          $servername = "localhost";
-          $username = "root";
-          $password = "";
-          $conn = new PDO("mysql:host=$servername;dbname=PHBlog", $username, $password);
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-          echo "connected successfully";
-        ?>
+        <?php require("article.php"); ?>
         <a href='dashboard.php'>dashboard</a>
     </header>
     <table>

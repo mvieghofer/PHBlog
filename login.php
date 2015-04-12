@@ -1,16 +1,4 @@
 <!DOCTYPE html>
-    
-    <?php
-        require("logincookie.php");
-    
-        if (isset($_GET["email"]) && isset($_GET["password"])) {
-            $loginCookie = new LoginCookie();
-            $loginCookie->userId = 1;
-            $loginCookie->userName = $_GET["email"];
-            setcookie(LOGIN_COOKIE_NAME, json_encode($loginCookie), time() + (86400 * 30), "/");
-            header("Location: dashboard.php");
-        }
-    ?>
 <html>
 <head>
   <meta charset="utf-8" />
@@ -20,9 +8,30 @@
 </head>
 <body>
     <h1>Login</h1>
+    <?php
+        require("logincookie.php");
+        require("db.php");
+        
+        if (isset($_GET["username"]) && isset($_GET["password"])) {
+            global $conn;
+            $statement = $conn->prepare("SElECT password FROM User WHERE username = :username");
+            $statement->execute(array(':username'=>$_GET["username"]));
+            $result = $statement->fetch();
+            
+            if ($result['password'] == $_GET['password']) {
+                $loginCookie = new LoginCookie();
+                $loginCookie->userId = 1;
+                $loginCookie->userName = $_GET["username"];
+                setcookie(LOGIN_COOKIE_NAME, json_encode($loginCookie), time() + (86400 * 30), "/");
+                header("Location: dashboard.php");
+            } else {
+                echo "<p>Error. Email or password is not correct</p>";
+            }
+        }
+    ?>
     <form action="login.php" method="get">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" /><br />
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" /><br />
         <label for="password">Password</label>
         <input type="password" id="password" name="password" /><br />
         <button type="submit">submit</button>
