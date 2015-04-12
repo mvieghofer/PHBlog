@@ -7,6 +7,10 @@
     } else {
         header("Location: login.php");
     }
+    
+    //if (isset($_GET["articleId"])) {
+    //    header("Location: edit.php?articleId=" . $_GET["articleId"]);
+    //}
 ?>
 
 <!DOCTYPE html>
@@ -35,11 +39,27 @@
             }
         ?>
     </div>
-    <form action="dashboard.php" method="get" id="dashboardForm">
+    <form action="edit.php" method="get" id="editForm">
         <input type="hidden" id="articleId">
     </form>
     <footer>
         Footer
     </footer>
+    <script type="text/javascript">
+        function editPage(articleId) {
+            $("#articleId").val(articleId);
+            $("#editForm").submit();
+        }
+        
+        $(function() {
+            $(".editArticle").click(function() {
+                var href = $(this).attr("href");
+                if (href.substring(0, 1) == "#") {
+                    href = href.substring(1, href.length);
+                }
+                editPage(href);
+            });
+        });
+    </script>
 </body>
 </html>
