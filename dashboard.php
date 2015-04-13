@@ -25,17 +25,19 @@
 <body>
     <header>
         <h1>PHBlog - Dashboard</h1>
+        <a href="logout.php">Logout</a>
+        <a href="edit.php">New Article</a>
     </header>
     <div>
         <?php
             require("db.php");
             require("article.php");
     
-            $articles = getArticles();
+            $articles = Article::getArticles();
             foreach ($articles as $article) {
                 echo "<article>";
                 echo "<h1>" . $article->headline . "</h1>";
-                echo "<a href='#" . $article->id . "' class='editArticle'>edit</a>";
+                echo "<a href='edit.php?pageId=" . $article->id . "' class='editArticle'>edit</a>";
                 echo "</article>";
             }
         ?>
@@ -46,21 +48,5 @@
     <footer>
         Footer
     </footer>
-    <script type="text/javascript">
-        function editPage(articleId) {
-            $("#articleId").val(articleId);
-            $("#editForm").submit();
-        }
-        
-        $(function() {
-            $(".editArticle").click(function() {
-                var href = $(this).attr("href");
-                if (href.substring(0, 1) == "#") {
-                    href = href.substring(1, href.length);
-                }
-                editPage(href);
-            });
-        });
-    </script>
 </body>
 </html>
