@@ -21,8 +21,8 @@
         <td>
           <section id="content">
             <?php
-              if (isset($_GET["page"])) {
-                $pageCode = $_GET["page"];
+              if (isset($_GET["pageId"])) {
+                $pageId = $_GET["pageId"];
                 require("page.php");
               } else {
                 require("content.php");

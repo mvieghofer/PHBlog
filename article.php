@@ -33,7 +33,7 @@
             echo "<article id=\"" . $this->id . "\">";
             echo "<h1>";
             if (!$includeComments) {
-                echo "<a href='#" . $this->id . "' class='pageLink'>";
+                echo "<a href='index.php?pageId=" . $this->id . "' class='pageLink'>";
             }
             echo $this->headline;
             if (!$includeComments) {
@@ -62,33 +62,67 @@
             echo "</div>";
             echo "</article>";
         }
-    }
-    
-    function getArticles() {
-        $sql = "SELECT id, headline, content FROM Article a where ispage = 0";
-        return loadArticlesFromDb($sql);
-    }
-    
-    function getPages() {
-        $sql = "SELECT id, headline, content FROM Article a where ispage = 1";
-        return loadArticlesFromDb($sql);
-    }
-    
-    function loadArticlesFromDb($sql) {
-        $articles = array();
-                
-        global $conn;
-        $result = $conn->query($sql);
-        foreach ($result as $row) {
+        
+        public static function getById($id) {
+            global $conn;
+            $query = $conn->prepare("SELECT headline, content from Article where id = :id");
+            $query->execute(array(':id'=>$id));
+            $result = $query->fetch();
             $article = new Article();
-            $article->id = $row['id'];
-            $article->headline = $row['headline'];
-            $article->content = $row['content'];
-            //$article->comments = getComments($article->id);
-            array_push($articles, $article);
+            $article->id = $id;
+            $article->headline = $result['headline'];
+            $article->content = $result['content'];
+            $article->getComments();
+            return $article;
         }
-        $isInitialized = true;
-        return $articles;
+        
+        public static function getArticles() {
+            $sql = "SELECT id, headline, content FROM Article where ispage = 0";
+            return self::loadArticlesFromDb($sql);
+        }
+    
+        public static function getPages() {
+            $sql = "SELECT id, headline, content FROM Article where ispage = 1";
+            return self::loadArticlesFromDb($sql);
+        }
+        
+        public static function getArticlesAndPages() {
+            $sql = "SELECT id, headline, content FROM Article";
+            return self::loadArticlesFromDb($sql);
+        }
+        
+        public static function update($article) {
+            $sql = "UPDATE Article SET headline = :headline, content = :content WHERE id = :id";
+            global $conn;
+            $statement = $conn->prepare($sql);
+            $statement->execute(array(':headline'=>$article->headline, ':content'=>$article->content, ':id'=>$article->id));
+        }
+        
+        public static function insert($article) {
+            $sql = "INSERT INTO Article (headline, content) VALUES (:headline, :content)";
+            global $conn;
+            $statement = $conn->prepare($sql);
+            $statement->execute(array(':headline'=>$article->headline, ':content'=>$article->content));
+        }
+    
+        private static function loadArticlesFromDb($sql) {
+            $articles = array();
+                
+            global $conn;
+            $result = $conn->query($sql);
+            foreach ($result as $row) {
+                $article = new Article();
+                $article->id = $row['id'];
+                $article->headline = $row['headline'];
+                $article->content = $row['content'];
+                //$article->comments = getComments($article->id);
+                array_push($articles, $article);
+            }
+            $isInitialized = true;
+            return $articles;
+        }
     }
+    
+    
     
 ?>
