@@ -11,6 +11,7 @@
         public $id = -1;
         public $headline = "";
         public $content = "";
+        public $ispage = 0;
         public $comments = array();
       
         function getComments() {
@@ -65,44 +66,45 @@
         
         public static function getById($id) {
             global $conn;
-            $query = $conn->prepare("SELECT headline, content from Article where id = :id");
+            $query = $conn->prepare("SELECT headline, content, ispage from Article where id = :id");
             $query->execute(array(':id'=>$id));
             $result = $query->fetch();
             $article = new Article();
             $article->id = $id;
             $article->headline = $result['headline'];
             $article->content = $result['content'];
+            $article->ispage = $result['ispage'];
             $article->getComments();
             return $article;
         }
         
         public static function getArticles() {
-            $sql = "SELECT id, headline, content FROM Article where ispage = 0";
+            $sql = "SELECT id, headline, content, ispage FROM Article where ispage = 0";
             return self::loadArticlesFromDb($sql);
         }
     
         public static function getPages() {
-            $sql = "SELECT id, headline, content FROM Article where ispage = 1";
+            $sql = "SELECT id, headline, content, ispage FROM Article where ispage = 1";
             return self::loadArticlesFromDb($sql);
         }
         
         public static function getArticlesAndPages() {
-            $sql = "SELECT id, headline, content FROM Article";
+            $sql = "SELECT id, headline, content, ispage FROM Article";
             return self::loadArticlesFromDb($sql);
         }
         
         public static function update($article) {
-            $sql = "UPDATE Article SET headline = :headline, content = :content WHERE id = :id";
+            $sql = "UPDATE Article SET headline = :headline, content = :content, ispage = :ispage WHERE id = :id";
             global $conn;
             $statement = $conn->prepare($sql);
-            $statement->execute(array(':headline'=>$article->headline, ':content'=>$article->content, ':id'=>$article->id));
+            $statement->execute(array(':headline'=>$article->headline, ':content'=>$article->content, ':ispage'=>$article->ispage, ':id'=>$article->id));
         }
         
         public static function insert($article) {
-            $sql = "INSERT INTO Article (headline, content) VALUES (:headline, :content)";
+            $sql = "INSERT INTO Article (headline, content, ispage) VALUES (:headline, :content, :ispage)";
             global $conn;
             $statement = $conn->prepare($sql);
-            $statement->execute(array(':headline'=>$article->headline, ':content'=>$article->content));
+            $statement->execute(array(':headline'=>$article->headline, ':content'=>$article->content, ':ispage'=>$article->ispage));
         }
     
         private static function loadArticlesFromDb($sql) {
@@ -115,7 +117,7 @@
                 $article->id = $row['id'];
                 $article->headline = $row['headline'];
                 $article->content = $row['content'];
-                //$article->comments = getComments($article->id);
+                $article->ispage = $row['ispage'];
                 array_push($articles, $article);
             }
             $isInitialized = true;

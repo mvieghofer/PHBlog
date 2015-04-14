@@ -33,7 +33,7 @@
             require("db.php");
             require("article.php");
     
-            $articles = Article::getArticles();
+            $articles = Article::getArticlesAndPages();
             foreach ($articles as $article) {
                 echo "<article>";
                 echo "<h1>" . $article->headline . "</h1>";
