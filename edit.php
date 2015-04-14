@@ -7,6 +7,7 @@
         $article = new Article();
         $article->content = $_GET["content"];
         $article->headline = $_GET["headline"];
+        $article->ispage = $_GET["ispage"] == "on";
         if ($mode == "edit") {
             $article->id = $_GET["pageId"];
             Article::update($article);
@@ -36,14 +37,15 @@
 
 <body>
     <form action="edit.php" method="get">
-        <input type="hidden" value="<?php if (is_null($pageId)) { echo 'newpost'; } else { echo 'edit'; } ?>" name="mode">
+        <input type="hidden" value="<?php if (!isset($_GET["pageId"])) { echo 'newpost'; } else { echo 'edit'; } ?>" name="mode">
         <?php
             if (isset($_GET["pageId"])) {
                 echo "<input type='hidden' name='pageId' value='" . $_GET["pageId"] . "'>";
             }
         ?>
         <input name="headline" value=" <?php echo $article->headline ?> " /><br />
-        <textarea name="content" value="" cols="150" rows="50"><?php echo $article->content ?></textarea>
+        <input type="checkbox" name="ispage" <?php if ($article->ispage) { echo 'checked'; } ?>>Is Page</input><br />
+        <textarea name="content" value="" cols="150" rows="50"><?php echo $article->content ?></textarea><br />
         <button type="submit">Submit</button>
     </form>
 
