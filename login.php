@@ -1,3 +1,23 @@
+<?php
+  require("logincookie.php");
+  require("db.php");
+        
+  if (isset($_GET["username"]) && isset($_GET["password"])) {
+    global $conn;
+    $statement = $conn->prepare("SElECT password FROM User WHERE username = :username");
+    $statement->execute(array(':username'=>$_GET["username"]));
+    $result = $statement->fetch();
+    if ($result['password'] == $_GET['password']) {
+      $loginCookie = new LoginCookie();
+      $loginCookie->userId = 1;
+      $loginCookie->userName = $_GET["username"];
+      setcookie(LOGIN_COOKIE_NAME, json_encode($loginCookie), time() + (86400 * 30), "/");
+      header("Location: dashboard.php");
+    } else {
+      echo "<p>Error. Email or password is not correct</p>";
+    }
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,25 +29,7 @@
 <body>
     <h1>Login</h1>
     <?php
-        require("logincookie.php");
-        require("db.php");
-        
-        if (isset($_GET["username"]) && isset($_GET["password"])) {
-            global $conn;
-            $statement = $conn->prepare("SElECT password FROM User WHERE username = :username");
-            $statement->execute(array(':username'=>$_GET["username"]));
-            $result = $statement->fetch();
-            
-            if ($result['password'] == $_GET['password']) {
-                $loginCookie = new LoginCookie();
-                $loginCookie->userId = 1;
-                $loginCookie->userName = $_GET["username"];
-                setcookie(LOGIN_COOKIE_NAME, json_encode($loginCookie), time() + (86400 * 30), "/");
-                header("Location: dashboard.php");
-            } else {
-                echo "<p>Error. Email or password is not correct</p>";
-            }
-        }
+    
     ?>
     <form action="login.php" method="get">
         <label for="username">Username</label>
