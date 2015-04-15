@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
     require("article.php");
     
@@ -23,6 +22,7 @@
         $article = new Article();
     }
 ?>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Edit -
