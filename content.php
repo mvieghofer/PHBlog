@@ -12,11 +12,14 @@
     }
     
     if (isset($_GET[ADD_COMMENT_KEY])) {
+        echo htmlentities($_GET[COMMENT_KEY]);
         $article = findArticle(Article::getArticlesAndPages(), $_GET[POST_ID_KEY]);
         $comment = new Comment();
         $comment->date = new DateTime();
-        $comment->comment = $_GET[COMMENT_KEY];
-        $comment->commentator = $_GET[COMMENTATOR_KEY];
+        $comment->comment = htmlspecialchars($_GET[COMMENT_KEY]);
+        echo $_GET[COMMENTATOR_KEY];
+        echo htmlspecialchars($_GET[COMMENTATOR_KEY]);
+        $comment->commentator = htmlspecialchars($_GET[COMMENTATOR_KEY]);
         Comment::insert($comment, $article->id);
         array_push($article->comments, $comment);
     }

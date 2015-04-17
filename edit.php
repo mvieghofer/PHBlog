@@ -4,8 +4,8 @@
     if (isset($_GET["mode"])) {
         $mode = $_GET["mode"];
         $article = new Article();
-        $article->content = $_GET["content"];
-        $article->headline = $_GET["headline"];
+        $article->content = htmlspecialchars($_GET["content"]);
+        $article->headline = htmlspecialchars($_GET["headline"]);
         $article->ispage = $_GET["ispage"] == "on";
         if ($mode == "edit") {
             $article->id = $_GET["pageId"];
