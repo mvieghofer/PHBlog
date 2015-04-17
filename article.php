@@ -1,6 +1,7 @@
 <?php
     require("comment.php");
     require("db.php");
+    require("libs/parsedown/Parsedown.php");
     
     define("COMMENT_KEY", "comment");
     define("COMMENTATOR_KEY", "commentator");
@@ -31,6 +32,7 @@
         }
         
         public function displayArticle($includeComments) {
+            $parsedown = new Parsedown();
             echo "<article id=\"" . $this->id . "\">";
             echo "<h1>";
             if (!$includeComments) {
@@ -41,7 +43,7 @@
                 echo "</a>";
             }
             echo "</h1>";
-            echo "<p>" . $this->content . "</p>";
+            echo "<p>" . $parsedown->text($this->content) . "</p>";
             echo "<div class=\"comments\">";
             if ($includeComments) {
                 echo "<h2>Comments</h2>";
