@@ -7,7 +7,8 @@
     $statement = $conn->prepare("SElECT password FROM User WHERE username = :username");
     $statement->execute(array(':username'=>$_POST["username"]));
     $result = $statement->fetch();
-    if ($result['password'] == $_POST['password']) {
+    $password = hash("sha256", $_POST["password"], false);
+    if ($result['password'] == $password) {
       $loginCookie = new LoginCookie();
       $loginCookie->userId = 1;
       $loginCookie->userName = $_POST["username"];
@@ -28,15 +29,13 @@
 </head>
 <body>
     <h1>Login</h1>
-    <?php
     
-    ?>
-    <form action="login.php" method="post">
+    <form action="login.php" method="post" id="loginForm">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" /><br />
         <label for="password">Password</label>
         <input type="password" id="password" name="password" /><br />
-        <button type="submit">submit</button>
+        <button type="submit" id="submit">submit</button>
     </form>
 </body>
 </html>
