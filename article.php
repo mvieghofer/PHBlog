@@ -53,9 +53,7 @@
                     echo "<p>" . $comment->comment . "</p>";
                     echo "</div>";
                 }
-                echo "<form id=\"commentForm\" action=\"index.php\" method=\"get\">";
-                echo "<input type=\"hidden\" name=\"" . ADD_COMMENT_KEY . "\" value=\"true\">";
-                echo "<input type=\"hidden\" name=\"" . POST_ID_KEY . "\" value=\"" . $this->id . "\">";
+                echo "<form id=\"commentForm\" action=\"index.php?pageId=$this->id\" method=\"post\">";
                 echo "<label for\"" . COMMENTATOR_KEY . "\">Name:</label>";
                 echo "<input type=\"input\" id=\"" . COMMENTATOR_KEY . "\" name=\"" . COMMENTATOR_KEY . "\"></input><br />";
                 echo "<textarea name=\"" . COMMENT_KEY . "\" rows=\"10\" cols=\"50\"></textarea>";
