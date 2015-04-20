@@ -3,23 +3,12 @@
     
     $articles = Article::getArticles();
     
-    function findArticle($articles, $articleId) {
-        foreach ($articles as $article) {
-            if ($article->id == $articleId) {
-                return $article;
-            }
-        }
-    }
-    
-    if (isset($_GET[ADD_COMMENT_KEY])) {
-        echo htmlentities($_GET[COMMENT_KEY]);
-        $article = findArticle(Article::getArticlesAndPages(), $_GET[POST_ID_KEY]);
+    if (isset($_POST[COMMENT_KEY])) {
+        $article = findArticle(Article::getArticlesAndPages(), $_GET["pageId"]);
         $comment = new Comment();
         $comment->date = new DateTime();
-        $comment->comment = htmlspecialchars($_GET[COMMENT_KEY]);
-        echo $_GET[COMMENTATOR_KEY];
-        echo htmlspecialchars($_GET[COMMENTATOR_KEY]);
-        $comment->commentator = htmlspecialchars($_GET[COMMENTATOR_KEY]);
+        $comment->comment = htmlspecialchars($_POST[COMMENT_KEY]);
+        $comment->commentator = htmlspecialchars($_POST[COMMENTATOR_KEY]);
         Comment::insert($comment, $article->id);
         array_push($article->comments, $comment);
     }

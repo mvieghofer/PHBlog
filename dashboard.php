@@ -7,10 +7,6 @@
     } else {
         header("Location: login.php");
     }
-    
-    //if (isset($_GET["articleId"])) {
-    //    header("Location: edit.php?articleId=" . $_GET["articleId"]);
-    //}
 ?>
 
 <!DOCTYPE html>

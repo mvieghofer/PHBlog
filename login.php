@@ -2,15 +2,15 @@
   require("logincookie.php");
   require("db.php");
         
-  if (isset($_GET["username"]) && isset($_GET["password"])) {
+  if (isset($_POST["username"]) && isset($_POST["password"])) {
     global $conn;
     $statement = $conn->prepare("SElECT password FROM User WHERE username = :username");
-    $statement->execute(array(':username'=>$_GET["username"]));
+    $statement->execute(array(':username'=>$_POST["username"]));
     $result = $statement->fetch();
-    if ($result['password'] == $_GET['password']) {
+    if ($result['password'] == $_POST['password']) {
       $loginCookie = new LoginCookie();
       $loginCookie->userId = 1;
-      $loginCookie->userName = $_GET["username"];
+      $loginCookie->userName = $_POST["username"];
       setcookie(LOGIN_COOKIE_NAME, json_encode($loginCookie), time() + (86400 * 30), "/");
       header("Location: dashboard.php");
     } else {
@@ -31,7 +31,7 @@
     <?php
     
     ?>
-    <form action="login.php" method="get">
+    <form action="login.php" method="post">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" /><br />
         <label for="password">Password</label>

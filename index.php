@@ -1,3 +1,26 @@
+<?php
+  require("article.php");
+
+  function findArticle($articles, $articleId) {
+    foreach ($articles as $article) {
+      if ($article->id == $articleId) {
+        return $article;
+      }
+    }
+  }
+    
+  if (isset($_POST[COMMENT_KEY])) {
+    $article = findArticle(Article::getArticlesAndPages(), $_GET["pageId"]);
+    $comment = new Comment();
+    $comment->date = new DateTime();
+    $comment->comment = htmlspecialchars($_POST[COMMENT_KEY]);
+    $comment->commentator = htmlspecialchars($_POST[COMMENTATOR_KEY]);
+    Comment::insert($comment, $article->id);
+    array_push($article->comments, $comment);
+    header("Location: index.php?pageId=$article->id");
+  }
+?>
+
 <!DOCTYPE html>
 <html>
   
@@ -10,7 +33,6 @@
 <body>
     <header>
         <h1>PHBlog</h1>
-        <?php require("article.php"); ?>
         <a href='dashboard.php'>dashboard</a>
     </header>
     <table>

@@ -1,19 +1,19 @@
 <?php
     require("article.php");
     
-    if (isset($_GET["mode"])) {
-        $mode = $_GET["mode"];
+    if (isset($_POST["mode"])) {
+        $mode = $_POST["mode"];
         $article = new Article();
-        $article->content = htmlspecialchars($_GET["content"]);
-        $article->headline = htmlspecialchars($_GET["headline"]);
-        $article->ispage = $_GET["ispage"] == "on";
+        $article->content = htmlspecialchars($_POST["content"]);
+        $article->headline = htmlspecialchars($_POST["headline"]);
+        $article->ispage = $_POST["ispage"] == "on";
         if ($mode == "edit") {
             $article->id = $_GET["pageId"];
             Article::update($article);
         } else {
             Article::insert($article);    
         }
-        header("Location: dashboard.php");
+        header("Location: edit.php?pageId=$article->id");
     }
     
     if (isset($_GET["pageId"])) {
@@ -36,7 +36,7 @@
 </head>
 
 <body>
-    <form action="edit.php" method="get">
+    <form action="edit.php<?php if (isset($_GET["pageId"])) { echo '?pageId='.$_GET["pageId"]; } ?>" method="post">
         <input type="hidden" value="<?php if (!isset($_GET["pageId"])) { echo 'newpost'; } else { echo 'edit'; } ?>" name="mode">
         <?php
             if (isset($_GET["pageId"])) {
