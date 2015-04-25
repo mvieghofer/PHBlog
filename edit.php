@@ -1,5 +1,5 @@
 <?php
-    require("article.php");
+    require("Article.php");
     
     if (isset($_POST["mode"])) {
         $mode = $_POST["mode"];

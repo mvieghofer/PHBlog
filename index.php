@@ -1,5 +1,5 @@
 <?php
-  require("article.php");
+  require("Article.php");
 
   function findArticle($articles, $articleId) {
     foreach ($articles as $article) {
@@ -31,9 +31,11 @@
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
+    <div id="hoverMenu">
+       <a id="dashboard" href='dashboard.php'>dashboard</a>
+    </div>
     <header>
         <h1>PHBlog</h1>
-        <a href='dashboard.php'>dashboard</a>
     </header>
     <table>
       <tr>
