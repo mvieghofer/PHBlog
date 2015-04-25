@@ -15,7 +15,7 @@
       setcookie(LOGIN_COOKIE_NAME, json_encode($loginCookie), time() + (86400 * 30), "/");
       header("Location: dashboard.php");
     } else {
-      echo "<p>Error. Email or password is not correct</p>";
+      header("Location: login.php?error=true");
     }
   }
 ?>
@@ -28,14 +28,18 @@
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
-    <h1>Login</h1>
-    
-    <form action="login.php" method="post" id="loginForm">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" /><br />
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" /><br />
-        <button type="submit" id="submit">submit</button>
-    </form>
+    <div id="login">
+      <h1>Login</h1>
+      <?php
+        if (isset($_GET["error"]) && $_GET["error"] == true) {
+          echo "<p>An error occured. Please check you email and password.</p>";
+        }
+      ?>
+      <form action="login.php" method="post" id="loginForm">
+          <input type="text" id="username" name="username" placeholder="Email" /><br />
+          <input type="password" id="password" name="password" placeholder="Password" /><br />
+          <button type="submit" id="submit">submit</button>
+      </form>
+    </div>
 </body>
 </html>
