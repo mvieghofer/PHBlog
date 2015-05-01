@@ -122,3 +122,51 @@ article {
     border: 0;
     margin-bottom: 5px;
 }
+
+/*
+ * edit
+ */
+#editForm {
+    position: absolute;
+    top:20px;
+    left: 20px;
+    width: 45%;
+}
+
+#headline {
+    position: absolute;
+    width: 100%;
+    margin-left: 5px;
+    padding: 5px;
+    border: hidden;
+}
+
+#content {
+    position: absolute;
+    top: 40px;
+    max-width: 100%;
+    width: 100%;
+    padding: 5px;
+    min-height: 75%;
+    border: hidden;
+}
+
+#formMenu {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+}
+
+.ui-wrapper {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 5px;
+}
+
+#output {
+    position: absolute;
+    left: 52%;
+    top: 20px;
+    width: 45%;
+    background-color: #fff;
+}
