@@ -2,7 +2,7 @@ html, body {
     height: 100%;
     width: 100%;
     background-color: #eee;
-    padding: 0;
+    padding: 0 20px;
     margin: 0;
     font-size: large;
 }
@@ -20,7 +20,7 @@ header {
     display: block;
     position: relative;
     height: auto;
-    width: 100%;
+    width: auto;
     padding-bottom: 25px;
     padding-left: 0;
     padding-right: 0;
@@ -45,7 +45,6 @@ td#nav {
 #content {
     padding-bottom: 25px;
     padding-top:25px;
-    padding-left: 25px;
 }
 
 article {
@@ -56,27 +55,67 @@ article {
 /*
  * index
  */
-
-#hoverMenu {
+#menu {
     position: absolute;
-    top: -20px;
-    left: 0;
+    top: 20px;
+    right: 0;
     display: block;
     padding-bottom: 10px;
-}
-
-#hoverMenu:hover {
-    transform: translateY(20px);
+    padding-right: 20px;
 }
 
 #dashboard {
-    background-color: #009B95;
+    padding: 5px;
+}
+
+/*
+ * dashboard
+ */
+.submenu {
+    display: block;
+    visibility: visible;
+}
+
+.submenu-hidden {
+    display: block;
+    visibility: hidden;
+}
+
+article {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+}
+
+.dashboardMenu li {
+    list-style-type: none;
+}
+
+.dashboardMenu li a {
+    width: 100%;
+}
+
+.dashboardMenu li.active {
+    background-color: #ff0000;
+}
+
+.dashboardMenu ul {
+    padding-left: 0;
+}
+
+.dashboard-hidden {
+    visibility: hidden;
 }
    
+.dashboardContent {
+    position: absolute;
+    width: auto;
+}
+
 /*
  * Login
  */
-  
 #login {
     position: absolute;
     top: 20%;
