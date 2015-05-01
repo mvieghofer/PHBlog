@@ -1,12 +1,23 @@
 <?php
           
     require("logincookie.php");
-          
+    require("db.php");
+    require("article.php");            
+    
+    define("ARTICLE_NAME", "Articles");      
+    define("POSTS_NAME", "Pages");
+    
     if (isset($_COOKIE[LOGIN_COOKIE_NAME])) {
         $loginCookie = json_decode($_COOKIE[LOGIN_COOKIE_NAME]);
     } else {
         header("Location: login.php");
     }
+    
+    if (isset($_POST["category"])) {
+        $category = $_POST["category"];
+        header("Location: dashboard.php");
+    }
+    
 ?>
 
 <!DOCTYPE html>
@@ -21,28 +32,89 @@
 <body>
     <header>
         <h1>PHBlog - Dashboard</h1>
-        <a href="logout.php">Logout</a>
-        <a href="edit.php">New Article</a>
     </header>
-    <div>
-        <?php
-            require("db.php");
-            require("article.php");
-    
-            $articles = Article::getArticlesAndPages();
-            foreach ($articles as $article) {
-                echo "<article>";
-                echo "<h1>" . $article->headline . "</h1>";
-                echo "<a href='edit.php?pageId=" . $article->id . "' class='editArticle'>edit</a>";
-                echo "</article>";
-            }
-        ?>
+    <div id="menu">
+        <div id="user">
+            <?php echo "Hello, $loginCookie->username" ?>
+            <div id="submenu" class="submenu-hidden">
+                <a href="logout.php">Logout</a>
+            </div>
+        </div>
     </div>
-    <form action="edit.php" method="get" id="editForm">
-        <input type="hidden" id="articleId">
-    </form>
+    <div>
+        <table id="dashboardTable">
+            <tr>
+                <td id="nav">
+                    <nav class="dashboardMenu">
+                        <ul>
+                            <li><a href="#"><?php echo ARTICLE_NAME ?></a></li>
+                            <li><a href="#"><?php echo POSTS_NAME ?></a></li>
+                        </ul>            
+                    </nav>            
+                </td>
+                <td>
+                    <div id="articles" class="dashboardContent">
+                        <div>
+                            <a href="edit.php" id="new">New Article</a>
+                        </div>
+                        <?php
+                            $articles = Article::getArticles();    
+                        
+                            foreach ($articles as $article) {
+                                echo "<article>";
+                                echo "<h1>" . $article->headline . "</h1>";
+                                echo "<a href='edit.php?pageId=" . $article->id . "' class='editArticle'>edit</a>";
+                                echo "</article>";
+                            }
+                        ?>
+                    </div>
+                    <div id="pages" class="dashboardContent dashboard-hidden">
+                        <div>
+                            <a href="edit.php" id="new">New Page</a>
+                        </div>
+                        <?php
+                            $articles = Article::getPages();    
+                            
+                            foreach ($articles as $article) {
+                                echo "<article>";
+                                echo "<h1>" . $article->headline . "</h1>";
+                                echo "<a href='edit.php?pageId=" . $article->id . "' class='editArticle'>edit</a>";
+                                echo "</article>";
+                            }
+                        ?>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
     <footer>
-        Footer
+        
     </footer>
+    
+    <script type="text/javascript">
+        $(function() {
+            $("#user").hover(
+                function() {
+                    $("#submenu").addClass("submenu");
+                    $("#submenu").removeClass("submenu-hidden");
+                },
+                function () {
+                    $("#submenu").addClass("submenu-hidden");
+                    $("#submenu").removeClass("submenu");
+                }
+            );
+            
+            $("nav.dashboardMenu a").click(function(e) {
+                var category = $(e.target).text();
+                if (category == "Articles") {
+                    $("#pages").addClass("dashboard-hidden");
+                    $("#articles").removeClass("dashboard-hidden");
+                } else {
+                    $("#articles").addClass("dashboard-hidden");
+                    $("#pages").removeClass("dashboard-hidden");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
