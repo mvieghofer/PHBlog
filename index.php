@@ -31,12 +31,12 @@
   <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
-    <div id="hoverMenu">
+    <header>
+        <h1><a href="index.php">PHBlog</a></h1>
+    </header>
+    <div id="menu">
        <a id="dashboard" href='dashboard.php'>dashboard</a>
     </div>
-    <header>
-        <h1>PHBlog</h1>
-    </header>
     <table>
       <tr>
         <td id="nav">
@@ -57,7 +57,6 @@
       </tr>
     </table>
     <footer>
-        Footer
     </footer>
 </body>
 </html>
