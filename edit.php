@@ -53,7 +53,7 @@
         <textarea name="content" id="content"><?php echo $article->content ?></textarea><br />
         <div id="formMenu">
             <input type="checkbox" id="ispage" name="ispage" <?php if ($article->ispage) { echo 'checked'; } ?>>Is Page</input><br />
-            <a href="dashboard.php">Cancle</a>
+            <a href="dashboard.php">Cancel</a>
             <button type="submit">Submit</button>
         </div>
     </form>  
