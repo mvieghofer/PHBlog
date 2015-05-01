@@ -3,7 +3,6 @@
     
     $navPoints = Article::getPages();
     echo "<nav><ul>";
-    echo "<li><a href=\"index.php\">Home</a></li>";
     foreach ($navPoints as $navPoint) {
         echo "<li><a class=\"pageLink\" href=\"index.php?pageId=" . $navPoint->id . "\">" . $navPoint->headline . "</a></li>";
     }
