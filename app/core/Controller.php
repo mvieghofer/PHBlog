@@ -1,12 +1,28 @@
 <?php
-namespace core;
-require_once("db.php");
+
+require_once(realpath(dirname(__FILE__) . "/../../resources/config.php"));
+require_once(APP_PATH . '/core/View.php');
 
 class Controller {
-    protected $view;
+    public $view;
     
     public function __construct() {
         $this->view = new View();
+    }
+    
+    public function model($model) {
+        $modelPath = APP_PATH . '/models/' . $model . '.php';
+        if (file_exists($modelPath)) {
+            require_once($modelPath);
+            return new $model;
+        }
+    }
+    
+    public function view($view, $data = []) {
+        $viewPath = APP_PATH . '/views/' . $view . '.php';
+        if (file_exists($viewPath)) {
+            $this->view->render($viewPath, $data);
+        }
     }
 }
 ?>

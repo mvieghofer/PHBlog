@@ -1,9 +1,7 @@
 <?php
     require_once(realpath(dirname(__FILE__) . "/../config.php"));
     
-    function renderLayoutWithContentfile($contentFile, $variables) {
-        $contentPath = TEMPLATES_PATH . "/" . $contentFile . ".php";
-        
+    function renderLayoutWithContentfile($contentFile, $variables) {        
         if (count($variables) > 0) {
             foreach ($variables as $key => $value) {
                 if (strlen($key) > 0) {
@@ -19,8 +17,8 @@
         echo "</div>";
         
         echo "<div id=\"content\">";
-        if (file_exists($contentPath)) {
-            require_once($contentPath);
+        if (file_exists($contentFile)) {
+            require_once($contentFile);
         } else {
             require_once(TEMPLATES_PATH . "/error.php");
         }

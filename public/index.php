@@ -22,13 +22,13 @@
 ?>
 
 <?php
-    require_once __DIR__ . '/vendor/autoload.php';
+    require_once realpath(dirname(__FILE__) . '/../vendor/autoload.php');
     require_once(realpath(dirname(__FILE__) . "/../resources/config.php"));
-
-    require_once(APP_PATH . "/controller/HomeController.php");
-    require_once(APP_PATH . "/controller/ArticleController.php");
+    require_once(APP_PATH . "/core/PHBlog.php");
     
-    $klein = new \Klein\Klein();
+    $app = new PHBlog();
+    
+    /*$klein = new \Klein\Klein();
     
     $homeController = new HomeController();
     $articleController = new ArticleController();
@@ -38,5 +38,5 @@
     $klein->respond('GET', '/home', $homeController->displayHomeAction());
     $klein->respond('GET', '/post/[:id]', $articleController->displayArticleAction($request));
     
-    renderLayoutWithContentfile("home.php", array());
+    renderLayoutWithContentfile("home.php", array());*/
 ?>
