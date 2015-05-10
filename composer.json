@@ -1,6 +1,11 @@
 {
     "require": {
-        "klein/klein": "^2.1",
-        "erusev/parsedown": "^1.5"
+        "erusev/parsedown": "^1.5",
+        "illuminate/database": "^5.0"
+    },
+    "autoload": {
+        "classmap": [
+            "app/models"
+        ]
     }
 }

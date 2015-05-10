@@ -46,10 +46,13 @@ defined("TEMPLATES_PATH")
     or define("TEMPLATES_PATH", realpath(dirname(__FILE__) . '/templates'));
     
 defined("STYLE_PATH")
-    or define("STYLE_PATH", realpath(dirname(__FILE__) . '/../public_html/css'));
+    or define("STYLE_PATH", realpath(dirname(__FILE__) . '/../public/css'));
     
 defined("APP_PATH")
-    or define("APP_PATH", realpath(__DIR__ . '/app'));
+    or define("APP_PATH", realpath(dirname(__FILE__) . '/../app'));
+    
+defined("DB_PATH")
+    or define("DB_PATH", realpath(APP_PATH . '/core/db.php'));
  
 /*
     Error reporting.

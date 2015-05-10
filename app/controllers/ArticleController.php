@@ -1,8 +1,6 @@
 <?php
-namespace controller;
-
-require_once __DIR__ . '/vendor/autoload.php';
-require_once(realpath(dirname(__FILE__) . "/../resources/config.php"));
+require_once(realpath(dirname(__FILE__) . '/../../resources/config.php'));
+require_once(DB_PATH);
 
 class ArticleController extends Controller {
     
@@ -16,7 +14,7 @@ class ArticleController extends Controller {
         $query = $conn->prepare("SELECT headline, content, ispage from Article where id = :id");
         $query->execute(array(':id'=>$request->id));
         $result = $query->fetch();
-        $article = new Article();
+        $article = $this->model('Article');
         $article->id = $request->id;
         $article->headline = $parsedown->text($result['headline']);
         $article->content = $parsedown->text($result['content']);
@@ -55,7 +53,7 @@ class ArticleController extends Controller {
     private function loadArticlesFromDb($sql) {
         $articles = array();
         $parsedown = new Parsedown();
-            
+        /*    
         global $conn;
         $result = $conn->query($sql);
         foreach ($result as $row) {
@@ -65,7 +63,7 @@ class ArticleController extends Controller {
             $article->content = $parsedown->text($row['content']);
             $article->ispage = $row['ispage'];
             array_push($articles, $article);
-        }
+        }*/
         return $articles;
     }
 }
