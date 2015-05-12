@@ -1,12 +1,17 @@
 <?php
-namespace controller;
-
-use core\Controller;
-
-class CommentController extends Controller {
+class DashboardController extends Controller {
     
     public function __construct() {
         parent::__construct();
+    }
+    
+    public function indexAction() {
+        $data = [
+            "articles" => Article::where('ispage', '=', 0)->get(),
+            "pages" => Article::where('ispage', '=', 1)->get()
+            ];
+        
+        $this->view("dashboard/index", $data);
     }
     
     public function loadComments($articleId) {

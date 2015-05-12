@@ -1,6 +1,7 @@
 <?php
 
 require_once(realpath(dirname(__FILE__) . "/../../resources/config.php"));
+require_once(DB_PATH);
     
 class PHBlog {
     protected $controller = 'HomeController';

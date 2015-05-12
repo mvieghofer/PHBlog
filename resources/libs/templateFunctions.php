@@ -1,14 +1,14 @@
 <?php
     require_once(realpath(dirname(__FILE__) . "/../config.php"));
     
-    function renderLayoutWithContentfile($contentFile, $variables) {        
-        if (count($variables) > 0) {
+    function renderLayoutWithContentfile($contentFile, $data) {        
+        /*if (count($variables) > 0) {
             foreach ($variables as $key => $value) {
                 if (strlen($key) > 0) {
                     ${$key} = $value;
                 }
             }
-        }
+        }*/
         
         require_once(TEMPLATES_PATH . "/header.php");
         

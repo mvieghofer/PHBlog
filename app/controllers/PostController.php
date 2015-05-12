@@ -1,29 +1,39 @@
 <?php
 require_once(realpath(dirname(__FILE__) . '/../../resources/config.php'));
-require_once(DB_PATH);
+require_once('HomeController.php');
 
-class ArticleController extends Controller {
+class PostController extends Controller {
     
     public function __construct() {
         parent::__construct();
     }
     
-    public function displayArticleAction($request) {
-        $parsedown = new Parsedown();
-        global $conn;
-        $query = $conn->prepare("SELECT headline, content, ispage from Article where id = :id");
-        $query->execute(array(':id'=>$request->id));
-        $result = $query->fetch();
-        $article = $this->model('Article');
-        $article->id = $request->id;
-        $article->headline = $parsedown->text($result['headline']);
-        $article->content = $parsedown->text($result['content']);
-        $article->ispage = $result['ispage'];
+    public function indexAction() {
+        $homeController = new HomeController();
+        $homeController->indexAction();
+    }
+    
+    public function showAction($id) {
+        $article = Article::find($id);
         
-        $commentController = new CommentController();
-        $article->comments =  $commentController->loadComments($article->id);
+        $this->view("post/show", $article);
+    }
+    
+    public function addCommentAction() {
+        $comment = new Comment();
+        $comment->commentator = $_POST['commentator'];
+        $comment->comment = $_POST['comment'];
+        $comment->date = new DateTime();
+        $comment->articleid = $_POST['postid'];
         
-        $view->render('article', array("article" => article));
+        $article = Article::find($comment->articleid);
+        $article->comments()->save($comment);
+        
+        parent::redirect("/post/show/$comment->articleid");
+    }
+    
+    public function editAction($postid = -1) {
+        
     }
     
     public function loadAllArticlesAction() {

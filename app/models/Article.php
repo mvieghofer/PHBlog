@@ -3,12 +3,12 @@
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Article extends Eloquent {
-    public $id = -1;
-    public $headline = "";
-    public $content = "";
-    public $ispage = 0;
-    public $comments = array();
     
+    protected $fillable = array('headline', 'content', 'ispage');
+    
+    public function comments() {
+        return $this->hasMany('Comment', 'articleid');
+    }
     /*const COMMENT_KEY = "comment";
     const COMMENTATOR_KEY = "commentator";
     

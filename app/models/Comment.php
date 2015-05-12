@@ -1,8 +1,8 @@
 <?php
-    class Comment {
-        public $id;
-        public $commentator;
-        public $comment;
-        public $date;
-    }
+use Illuminate\Database\Eloquent\Model as Eloquent;
+
+class Comment extends Eloquent {
+    
+    protected $fillable = ['commentator', 'comment', 'date', 'articleid'];
+}
 ?>

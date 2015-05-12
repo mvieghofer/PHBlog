@@ -24,5 +24,9 @@ class Controller {
             $this->view->render($viewPath, $data);
         }
     }
+    
+    public function redirect($url) {
+        header("Location: {$url}");
+    }
 }
 ?>
