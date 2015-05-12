@@ -1,15 +1,15 @@
-<form action="edit.php<?php if (isset($_GET["pageId"])) { echo '?pageId='.$_GET["pageId"]; } ?>" method="post" id="editForm">
-    <input type="hidden" value="<?php if (!isset($_GET["pageId"])) { echo 'newpost'; } else { echo 'edit'; } ?>" name="mode">
-    <?php
-        if (isset($_GET["pageId"])) {
-            echo "<input type='hidden' name='pageId' value='" . $_GET["pageId"] . "'>";
-        }
-    ?>
-    <input name="headline" value="<?php echo $article->headline ?>" id="headline" /><br />
-    <textarea name="content" id="content"><?php echo $article->content ?></textarea><br />
+<?php
+    $parsedown = new Parsedown();
+    $post = $data['post'];
+?>
+<form action='<?php echo $data['returnPath']; ?>' method='post' id='editForm'>
+<?php
+    echo "<input type='hidden' name='id' value='$post->id'>";
+?>
+    <input name="headline" value="<?php echo $parsedown->text($post->headline) ?>" id="headline" /><br />
+    <textarea name="content" id="content"><?php echo $parsedown->text($post->content) ?></textarea><br />
     <div id="formMenu">
-        <input type="checkbox" id="ispage" name="ispage" <?php if ($article->ispage) { echo 'checked'; } ?>>Is Page</input><br />
-        <a href="dashboard.php">Cancel</a>
+        <a href="/dashboard">Cancel</a>
         <button type="submit">Submit</button>
     </div>
 </form>  
@@ -48,6 +48,8 @@ $(function() {
 });
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-<script type="text/javascript" src="../../../public/javascript/libs/markdown/lib/markdown.js"></script>
+<?php
+    echo "<script type='text/javascript' src='" . LIBRARY_PATH . "/markdown/lib/markdown.js'></script>";
+?>
 
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">

@@ -11,7 +11,7 @@
         <td>
             <div id="articles" class="dashboardContent">
                 <div>
-                    <a href="/post/edit" id="new">New Article</a>
+                    <a href="/post/new" id="new">New Article</a>
                 </div>
                 <?php
                     $articles = $data["articles"];    
@@ -19,14 +19,14 @@
                     foreach ($articles as $article) {
                         echo "<article>";
                         echo "<h1>" . $article->headline . "</h1>";
-                        echo "<a href='/post/edit$article->id' class='editArticle'>edit</a>";
+                        echo "<a href='/post/edit/$article->id' class='editArticle'>edit</a>";
                         echo "</article>";
                     }
                 ?>
             </div>
             <div id="pages" class="dashboardContent dashboard-hidden">
                 <div>
-                    <a href="/post/edit" id="new">New Page</a>
+                    <a href="/page/new" id="new">New Page</a>
                 </div>
                 <?php
                     $articles = $data["pages"];  
@@ -34,7 +34,7 @@
                     foreach ($articles as $article) {
                         echo "<article>";
                         echo "<h1>" . $article->headline . "</h1>";
-                        echo "<a href='/post/edit$article->id' class='editArticle'>edit</a>";
+                        echo "<a href='/page/edit/$article->id' class='editArticle'>edit</a>";
                         echo "</article>";
                     }
                 ?>

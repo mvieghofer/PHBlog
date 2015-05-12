@@ -14,9 +14,8 @@ class PostController extends Controller {
     }
     
     public function showAction($id) {
-        $article = Article::find($id);
-        
-        $this->view("post/show", $article);
+        $post = Article::find($id);
+        $this->view("post/show", $post);
     }
     
     public function addCommentAction() {
@@ -33,7 +32,36 @@ class PostController extends Controller {
     }
     
     public function editAction($postid = -1) {
-        
+        $post = Article::find($postid);
+        $data = [
+            'post' => $post,
+            'returnPath' => '/post/save'
+        ];
+        $this->view('post/edit', $data);
+    }
+    
+    public function newAction() {
+        $post = new Article();
+        $data = [
+            'post' => $post,
+            'returnPath' => '/post/save'
+        ];
+        $this->view('post/edit', $data);
+    }
+    
+    public function saveAction() {
+        $article = new Article();
+        $article->content = htmlspecialchars($_POST['content']);
+        $article->headline = htmlspecialchars($_POST['headline']);
+        $article->ispage = false;
+        if ($_POST['id'] > -1) {
+            $article->id = $_POST['id'];
+            $article->update();
+        } else {
+            $article->insert();
+        }
+        var_dump($article->id);
+        //parent::redirect('/page/edit/' . $article->id);
     }
     
     public function loadAllArticlesAction() {
