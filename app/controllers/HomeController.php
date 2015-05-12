@@ -1,9 +1,5 @@
 <?php
 
-require_once(realpath(dirname(__FILE__) . '/../../resources/config.php'));
-require_once(APP_PATH . '/core/Controller.php');
-require_once(APP_PATH . '/controllers/ArticleController.php');
-
 class HomeController extends Controller {
     
     public function __construct() {
@@ -11,10 +7,9 @@ class HomeController extends Controller {
     }
     
     public function indexAction() {
-        $arcticleController = new ArticleController();
-        $articles = $arcticleController->loadAllArticlesAction();
+        $articles = Article::where('ispage', '=', 0)->get();
         
-        $this->view('home/index');
+        $this->view('home/index', $articles);
     }
 }
 ?>

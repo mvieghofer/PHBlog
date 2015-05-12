@@ -5,11 +5,12 @@ html, body {
     padding: 0 20px;
     margin: 0;
     font-size: large;
+    position: absolute;
 }
 
 footer {
     display: block;
-    position: relative;
+    position: absolute;
     width: 100%;
     height: auto;
     padding: 0;
@@ -40,11 +41,6 @@ table {
 td#nav {
     width: 20%;
     position: relative;
-}
-
-#content {
-    padding-bottom: 25px;
-    padding-top:25px;
 }
 
 article {
@@ -181,8 +177,8 @@ article {
 }
 
 #content {
-    position: absolute;
-    top: 40px;
+    position: relative;
+    top: 0px;
     max-width: 100%;
     width: 100%;
     padding: 5px;
