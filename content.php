@@ -1,10 +1,10 @@
 <?php
     require("pagelink.php");
     
-    $articles = Article::getArticles();
+    $articles = Post::getPosts();
     
     if (isset($_POST[COMMENT_KEY])) {
-        $article = findArticle(Article::getArticlesAndPages(), $_GET["pageId"]);
+        $article = findPost(Post::getPostsAndPages(), $_GET["pageId"]);
         $comment = new Comment();
         $comment->date = new DateTime();
         $comment->comment = htmlspecialchars($_POST[COMMENT_KEY]);
@@ -14,6 +14,6 @@
     }
     
     foreach($articles as $article) {
-        $article->displayArticle(false);
+        $article->displayPost(false);
     }
 ?>

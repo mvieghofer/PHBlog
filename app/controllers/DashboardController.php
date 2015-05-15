@@ -7,8 +7,8 @@ class DashboardController extends Controller {
     
     public function indexAction() {
         $data = [
-            "articles" => Article::where('ispage', '=', 0)->get(),
-            "pages" => Article::where('ispage', '=', 1)->get()
+            "articles" => Post::where('ispage', '=', 0)->get(),
+            "pages" => Post::where('ispage', '=', 1)->get()
             ];
         
         $this->view("dashboard/index", $data);

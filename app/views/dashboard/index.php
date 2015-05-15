@@ -3,7 +3,7 @@
         <td id="nav">
             <nav class="dashboardMenu">
                 <ul>
-                    <li><a href="#">Articles</a></li>
+                    <li><a href="#">Posts</a></li>
                     <li><a href="#">Pages</a></li>
                 </ul>            
             </nav>            
@@ -11,7 +11,7 @@
         <td>
             <div id="articles" class="dashboardContent">
                 <div>
-                    <a href="/post/new" id="new">New Article</a>
+                    <a href="/post/new" id="new">New Post</a>
                 </div>
                 <?php
                     $articles = $data["articles"];    
@@ -19,7 +19,7 @@
                     foreach ($articles as $article) {
                         echo "<article>";
                         echo "<h1>" . $article->headline . "</h1>";
-                        echo "<a href='/post/edit/$article->id' class='editArticle'>edit</a>";
+                        echo "<a href='/post/edit/$article->id' class='editPost'>edit</a>";
                         echo "</article>";
                     }
                 ?>
@@ -34,7 +34,7 @@
                     foreach ($articles as $article) {
                         echo "<article>";
                         echo "<h1>" . $article->headline . "</h1>";
-                        echo "<a href='/page/edit/$article->id' class='editArticle'>edit</a>";
+                        echo "<a href='/page/edit/$article->id' class='editPost'>edit</a>";
                         echo "</article>";
                     }
                 ?>
@@ -58,7 +58,7 @@
         
         $("nav.dashboardMenu a").click(function(e) {
             var category = $(e.target).text();
-            if (category == "Articles") {
+            if (category == "Posts") {
                 $("#pages").addClass("dashboard-hidden");
                 $("#articles").removeClass("dashboard-hidden");
             } else {

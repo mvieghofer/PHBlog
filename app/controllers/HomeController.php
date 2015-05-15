@@ -7,7 +7,7 @@ class HomeController extends Controller {
     }
     
     public function indexAction() {
-        $articles = Article::where('ispage', '=', 0)->get();
+        $articles = Post::where('ispage', '=', 0)->get();
         
         $this->view('home/index', $articles);
     }
