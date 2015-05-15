@@ -4,7 +4,7 @@
     require("db.php");
     require("article.php");            
     
-    define("ARTICLE_NAME", "Articles");      
+    define("ARTICLE_NAME", "Posts");      
     define("POSTS_NAME", "Pages");
     
     if (isset($_COOKIE[LOGIN_COOKIE_NAME])) {
@@ -55,15 +55,15 @@
                 <td>
                     <div id="articles" class="dashboardContent">
                         <div>
-                            <a href="edit.php" id="new">New Article</a>
+                            <a href="edit.php" id="new">New Post</a>
                         </div>
                         <?php
-                            $articles = Article::getArticles();    
+                            $articles = Post::getPosts();    
                         
                             foreach ($articles as $article) {
                                 echo "<article>";
                                 echo "<h1>" . $article->headline . "</h1>";
-                                echo "<a href='edit.php?pageId=" . $article->id . "' class='editArticle'>edit</a>";
+                                echo "<a href='edit.php?pageId=" . $article->id . "' class='editPost'>edit</a>";
                                 echo "</article>";
                             }
                         ?>
@@ -73,12 +73,12 @@
                             <a href="edit.php" id="new">New Page</a>
                         </div>
                         <?php
-                            $articles = Article::getPages();    
+                            $articles = Post::getPages();    
                             
                             foreach ($articles as $article) {
                                 echo "<article>";
                                 echo "<h1>" . $article->headline . "</h1>";
-                                echo "<a href='edit.php?pageId=" . $article->id . "' class='editArticle'>edit</a>";
+                                echo "<a href='edit.php?pageId=" . $article->id . "' class='editPost'>edit</a>";
                                 echo "</article>";
                             }
                         ?>
@@ -106,7 +106,7 @@
             
             $("nav.dashboardMenu a").click(function(e) {
                 var category = $(e.target).text();
-                if (category == "Articles") {
+                if (category == "Posts") {
                     $("#pages").addClass("dashboard-hidden");
                     $("#articles").removeClass("dashboard-hidden");
                 } else {

@@ -2,19 +2,10 @@ html, body {
     height: 100%;
     width: 100%;
     background-color: #eee;
-    padding: 0 20px;
+    padding: 0;
     margin: 0;
     font-size: large;
     position: absolute;
-}
-
-footer {
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: auto;
-    padding: 0;
-    bottom: 0;
 }
 
 header {
@@ -26,21 +17,6 @@ header {
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-}
-
-nav {
-    min-width: 100px;
-    position: absolute;
-    top: 0;
-}
-
-table {
-    width: 100%;
-}
-
-td#nav {
-    width: 20%;
-    position: relative;
 }
 
 article {
@@ -56,8 +32,6 @@ article {
     top: 20px;
     right: 0;
     display: block;
-    padding-bottom: 10px;
-    padding-right: 20px;
 }
 
 #dashboard {
@@ -82,6 +56,10 @@ article {
     padding-right: 5px;
     padding-bottom: 5px;
     padding-top: 0px;
+}
+
+form#commentForm input, textarea {
+    width: 100%
 }
 
 .dashboardMenu li {
@@ -173,16 +151,6 @@ article {
     width: 100%;
     margin-left: 5px;
     padding: 5px;
-    border: hidden;
-}
-
-#content {
-    position: relative;
-    top: 0px;
-    max-width: 100%;
-    width: 100%;
-    padding: 5px;
-    min-height: 75%;
     border: hidden;
 }
 

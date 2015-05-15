@@ -6,8 +6,8 @@
 <?php
     echo "<input type='hidden' name='id' value='$post->id'>";
 ?>
-    <input name="headline" value="<?php echo $parsedown->text($post->headline) ?>" id="headline" /><br />
-    <textarea name="content" id="content"><?php echo $parsedown->text($post->content) ?></textarea><br />
+    <input name="headline" value="<?php echo $post->headline ?>" id="headline" /><br />
+    <textarea name="content" id="content"><?php echo $post->content ?></textarea><br />
     <div id="formMenu">
         <a href="/dashboard">Cancel</a>
         <button type="submit">Submit</button>

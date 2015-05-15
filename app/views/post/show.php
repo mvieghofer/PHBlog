@@ -3,8 +3,7 @@
     echo "<article id='$data->id'>";
     echo "<h1>$data->headline</h1>";
     echo "<div>" . $parsedown->text($data->content) . "</div>";
-    echo "</article>";
-    echo "<div class='comments'>";
+    echo "<hr class='comment-separator'><div class='comments'>";
     echo "<h2>Comments</h2>";
     foreach ($data->comments as $comment) {
         echo "<div class\"comment\">";
@@ -15,8 +14,9 @@
     echo "<form id='commentForm' action='/post/addComment' method='post'>";
     echo "<input type='hidden' name='postid' value='$data->id'></input>";
     echo "<input type='input' id='commentator' name='commentator' placeholder='Name'></input><br />";
-    echo "<textarea name='comment'></textarea>";
+    echo "<textarea name='comment' placeholder='Tell me your opinion'></textarea>";
     echo "<button type'submit'>submit</button>";
     echo "</form>";
     echo "</div>";
+    echo "</article>";
 ?>

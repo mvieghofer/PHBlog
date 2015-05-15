@@ -1,25 +1,25 @@
 <?php
-    require("Article.php");
+    require("Post.php");
     
     if (isset($_POST["mode"])) {
         $mode = $_POST["mode"];
-        $article = new Article();
+        $article = new Post();
         $article->content = htmlspecialchars($_POST["content"]);
         $article->headline = htmlspecialchars($_POST["headline"]);
         $article->ispage = $_POST["ispage"] == "on";
         if ($mode == "edit") {
             $article->id = $_GET["pageId"];
-            Article::update($article);
+            Post::update($article);
         } else {
-            Article::insert($article);    
+            Post::insert($article);    
         }
         header("Location: dashboard.php");
     }
     
     if (isset($_GET["pageId"])) {
-        $article = Article::getById($_GET["pageId"]);
+        $article = Post::getById($_GET["pageId"]);
     } else {
-        $article = new Article();
+        $article = new Post();
     }
 ?>
 <!DOCTYPE html>

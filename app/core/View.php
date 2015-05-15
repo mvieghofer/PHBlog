@@ -5,8 +5,8 @@ require_once(LIBRARY_PATH . "/templateFunctions.php");
 
 class View {
     
-    public function render($template, $data) {
-        renderLayoutWithContentfile($template, $data);
+    public function renderContent($template, $data) {
+        renderContentView($template, $data);
     }
 }
 

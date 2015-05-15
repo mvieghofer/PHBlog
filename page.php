@@ -1,6 +1,6 @@
 <?php
   $pageId = $_GET["pageId"];
   
-  $article = Article::getById($pageId);
-  $article->displayArticle(true);
+  $article = Post::getById($pageId);
+  $article->displayPost(true);
 ?>

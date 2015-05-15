@@ -14,7 +14,7 @@ class PostController extends Controller {
     }
     
     public function showAction($id) {
-        $post = Article::find($id);
+        $post = Post::find($id);
         $this->view("post/show", $post);
     }
     
@@ -25,14 +25,14 @@ class PostController extends Controller {
         $comment->date = new DateTime();
         $comment->articleid = $_POST['postid'];
         
-        $article = Article::find($comment->articleid);
+        $article = Post::find($comment->articleid);
         $article->comments()->save($comment);
         
         parent::redirect("/post/show/$comment->articleid");
     }
     
     public function editAction($postid = -1) {
-        $post = Article::find($postid);
+        $post = Post::where('id', '=', $postid)->where('ispage', '=', 0)->first();
         $data = [
             'post' => $post,
             'returnPath' => '/post/save'
@@ -41,7 +41,8 @@ class PostController extends Controller {
     }
     
     public function newAction() {
-        $post = new Article();
+        $post = new Post();
+        $post->ispage = false;
         $data = [
             'post' => $post,
             'returnPath' => '/post/save'
@@ -50,52 +51,49 @@ class PostController extends Controller {
     }
     
     public function saveAction() {
-        $article = new Article();
+        $article = new Post();
+        if ($_POST['id'] > -1) {
+            $article = Post::find($_POST['id']);
+        }
         $article->content = htmlspecialchars($_POST['content']);
         $article->headline = htmlspecialchars($_POST['headline']);
         $article->ispage = false;
-        if ($_POST['id'] > -1) {
-            $article->id = $_POST['id'];
-            $article->update();
-        } else {
-            $article->insert();
-        }
-        var_dump($article->id);
-        //parent::redirect('/page/edit/' . $article->id);
+        $article->save();
+        parent::redirect('/post/edit/' . $article->id);
     }
     
-    public function loadAllArticlesAction() {
-        $sql = "SELECT id, headline, content, ispage FROM Article where ispage = 0";
-        return $this->loadArticlesFromDb($sql);
+    public function loadAllPostsAction() {
+        $sql = "SELECT id, headline, content, ispage FROM Post where ispage = 0";
+        return $this->loadPostsFromDb($sql);
     }
 
     public function loadAllPagesAction() {
-        $sql = "SELECT id, headline, content, ispage FROM Article where ispage = 1";
-        return $this->loadArticlesFromDb($sql);
+        $sql = "SELECT id, headline, content, ispage FROM Post where ispage = 1";
+        return $this->loadPostsFromDb($sql);
     }
     
     public function update($article) {
-        $sql = "UPDATE Article SET headline = :headline, content = :content, ispage = :ispage WHERE id = :id";
+        $sql = "UPDATE Post SET headline = :headline, content = :content, ispage = :ispage WHERE id = :id";
         global $conn;
         $statement = $conn->prepare($sql);
         $statement->execute(array(':headline'=>$article->headline, ':content'=>$article->content, ':ispage'=>$article->ispage, ':id'=>$article->id));
     }
     
     public function insert($article) {
-        $sql = "INSERT INTO Article (headline, content, ispage) VALUES (:headline, :content, :ispage)";
+        $sql = "INSERT INTO Post (headline, content, ispage) VALUES (:headline, :content, :ispage)";
         global $conn;
         $statement = $conn->prepare($sql);
         $statement->execute(array(':headline'=>$article->headline, ':content'=>$article->content, ':ispage'=>$article->ispage));
     }
 
-    private function loadArticlesFromDb($sql) {
+    private function loadPostsFromDb($sql) {
         $articles = array();
         $parsedown = new Parsedown();
         /*    
         global $conn;
         $result = $conn->query($sql);
         foreach ($result as $row) {
-            $article = new Article();
+            $article = new Post();
             $article->id = $row['id'];
             $article->headline = $parsedown->text($row['headline']);
             $article->content = $parsedown->text($row['content']);
