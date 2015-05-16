@@ -1,3 +1,4 @@
 *.komodoproject
 vendor/
 composer.lock
+**/db.php
