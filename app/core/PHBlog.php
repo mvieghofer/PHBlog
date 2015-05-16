@@ -58,5 +58,12 @@ class PHBlog {
     protected function getControllerName($param) {
         return ucfirst($param) . 'Controller';
     }
+    
+    public static function getUrl($url) {
+        if (substr($url, 0, 1) !== '/') {
+            $url = '/' . $url;
+        }
+        return '/phblog' . $url;
+    }
 }
 ?>

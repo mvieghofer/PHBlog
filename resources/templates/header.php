@@ -7,14 +7,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../public/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/phblog/public/css/style.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><a href="/">PHBlog</a></h1>
+            <h1><a href="<?php echo PHBlog::getUrl('/'); ?>">PHBlog</a></h1>
         </header>
         <div id="menu">
-           <a id="dashboard" href='/dashboard'>dashboard</a>
+           <a id="dashboard" href='<?php echo PHBlog::getUrl('/dashboard'); ?>'>dashboard</a>
         </div>
