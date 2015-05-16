@@ -9,14 +9,6 @@
 */
  
 $config = array(
-    "db" => array(
-        "phblog" => array(
-            "dbname" => "d01deb5e",
-            "username" => "d01deb5e",
-            "password" => "PHBlogPassword",
-            "host" => "dd5926.kasserver.com"
-        )
-    ),
     "urls" => array(
         "baseUrl" => "http://localhost:8888"
     ),
@@ -39,6 +31,7 @@ $config = array(
     Creating constants for heavily used paths makes things a lot easier.
     ex. require_once(LIBRARY_PATH . "Paginator.php")
 */
+
 defined("LIBRARY_PATH")
     or define("LIBRARY_PATH", realpath(dirname(__FILE__) . '/libs'));
      

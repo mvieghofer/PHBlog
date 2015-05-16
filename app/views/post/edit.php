@@ -9,7 +9,7 @@
     <input name="headline" value="<?php echo $post->headline ?>" id="headline" /><br />
     <textarea name="content" id="content"><?php echo $post->content ?></textarea><br />
     <div id="formMenu">
-        <a href="/dashboard">Cancel</a>
+        <a href="<?php echo PHBlog::getUrl('/dashboard'); ?>">Cancel</a>
         <button type="submit">Submit</button>
     </div>
 </form>  

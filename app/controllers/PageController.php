@@ -33,14 +33,7 @@ class PageController extends PostController {
     }
     
     public function saveAction() {
-        $article = new Post();
-        if (!empty($_POST['id']) && $_POST['id'] > -1) {
-            $article = Post::find($_POST['id']);
-        }
-        $article->content = htmlspecialchars($_POST['content']);
-        $article->headline = htmlspecialchars($_POST['headline']);
-        $article->ispage = true;
-        $article->save();
+        $post = savePost(true);
         parent::redirect('/page/edit/' . $article->id);
     }
 }
