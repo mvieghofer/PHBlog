@@ -1,0 +1,175 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: #eee;
+    padding: 0;
+    margin: 0;
+    font-size: large;
+    position: absolute;
+}
+
+header {
+    display: block;
+    position: relative;
+    height: auto;
+    width: auto;
+    padding-bottom: 25px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+}
+
+article {
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+}
+
+/*
+ * index
+ */
+#menu {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    display: block;
+}
+
+#dashboard {
+    padding: 5px;
+}
+
+/*
+ * dashboard
+ */
+.submenu {
+    display: block;
+    visibility: visible;
+}
+
+.submenu-hidden {
+    display: block;
+    visibility: hidden;
+}
+
+article {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+}
+
+form#commentForm input, textarea {
+    width: 100%
+}
+
+.dashboardMenu li {
+    list-style-type: none;
+}
+
+.dashboardMenu li a {
+    width: 100%;
+}
+
+.dashboardMenu li.active {
+    background-color: #ff0000;
+}
+
+.dashboardMenu ul {
+    padding-left: 0;
+}
+
+.dashboard-hidden {
+    visibility: hidden;
+}
+   
+.dashboardContent {
+    position: absolute;
+    width: auto;
+}
+
+/*
+ * Login
+ */
+#login {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+}
+
+#login h1 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#login p {
+    position: absolute;
+    top: 55px;
+    width: 100%;
+    text-align: center;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(255, 0, 0);
+}
+
+#loginForm {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#loginForm #submit {
+    background-color: #009B95;
+    border: 0;
+    color: #fff;
+    font-size: 1em;
+    float: right;
+}
+
+#loginForm input {
+    font-size: 1em;
+    border: 0;
+    margin-bottom: 5px;
+}
+
+/*
+ * edit
+ */
+#editForm {
+    position: absolute;
+    top:20px;
+    left: 20px;
+    width: 45%;
+}
+
+#headline {
+    position: absolute;
+    width: 100%;
+    margin-left: 5px;
+    padding: 5px;
+    border: hidden;
+}
+
+#formMenu {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+}
+
+.ui-wrapper {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 5px;
+}
+
+#output {
+    position: absolute;
+    left: 52%;
+    top: 20px;
+    width: 45%;
+    background-color: #fff;
+}
