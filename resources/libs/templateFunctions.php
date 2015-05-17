@@ -36,4 +36,33 @@
         
         require_once(TEMPLATES_PATH . "/dashboard/footer.php");
     }
+    
+    function renderWithoutNavigation($contentFile, $data) {
+        require_once(TEMPLATES_PATH . "/edit/header.php");
+        echo '<div class="row">';        
+        echo '<div id="content" class="col-xs-12">';
+        if (file_exists($contentFile)) {
+            require_once($contentFile);
+        } else {
+            require_once(TEMPLATES_PATH . "/error.php");
+        }
+        echo "</div></div><!-- row -->";
+        
+        require_once(TEMPLATES_PATH . "/edit/footer.php");
+    }
+    
+    function renderLoginView($contentFile) {
+        require_once(TEMPLATES_PATH . "/login/header.php");
+        echo '<div class="row">';
+        
+        echo '<div id="content" class="col-xs-12">';
+        if (file_exists($contentFile)) {
+            require_once($contentFile);
+        } else {
+            require_once(TEMPLATES_PATH . "/error.php");
+        }
+        echo "</div></div><!-- row -->";
+        
+        require_once(TEMPLATES_PATH . "/login/footer.php");
+    }
 ?>
