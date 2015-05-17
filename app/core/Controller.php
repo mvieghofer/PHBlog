@@ -21,8 +21,12 @@ class Controller {
     public function view($view, $data = []) {
         $viewPath = APP_PATH . '/views/' . $view . '.php';
         if (file_exists($viewPath)) {
-            $this->view->renderContent($viewPath, $data);
+            $this->renderView($viewPath, $data);
         }
+    }
+    
+    protected function renderView($view, $data) {
+        $this->view->renderContent($view, $data);
     }
     
     public function redirect($url) {

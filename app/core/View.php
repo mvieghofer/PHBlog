@@ -8,6 +8,10 @@ class View {
     public function renderContent($template, $data) {
         renderContentView($template, $data);
     }
+    
+    public function renderDashboard($template, $data) {
+        renderDashboardView($template, $data);
+    }
 }
 
 ?>

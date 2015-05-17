@@ -80,11 +80,13 @@ form#commentForm input, textarea {
 
 .dashboard-hidden {
     visibility: hidden;
+    width: 0;
+    height: 0;
 }
    
 .dashboardContent {
-    position: absolute;
     width: auto;
+    height: auto;
 }
 
 /*

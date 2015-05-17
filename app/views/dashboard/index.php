@@ -1,70 +1,30 @@
-<table id="dashboardTable">
-    <tr>
-        <td id="nav">
-            <nav class="dashboardMenu">
-                <ul>
-                    <li><a href="#">Posts</a></li>
-                    <li><a href="#">Pages</a></li>
-                </ul>            
-            </nav>            
-        </td>
-        <td>
-            <div id="articles" class="dashboardContent">
-                <div>
-                    <a href="<?php echo PHBlog::getUrl('/post/new'); ?>" id="new">New Post</a>
-                </div>
-                <?php
-                    $articles = $data["articles"];    
-                
-                    foreach ($articles as $article) {
-                        echo "<article>";
-                        echo "<h1>" . $article->headline . "</h1>";
-                        echo "<a href='" . PHBlog::getUrl("/post/edit/$article->id") . "' class='editPost'>edit</a>";
-                        echo "</article>";
-                    }
-                ?>
-            </div>
-            <div id="pages" class="dashboardContent dashboard-hidden">
-                <div>
-                    <a href="<?php echo PHBlog::getUrl('/page/new'); ?>" id="new">New Page</a>
-                </div>
-                <?php
-                    $articles = $data["pages"];  
-                    
-                    foreach ($articles as $article) {
-                        echo "<article>";
-                        echo "<h1>" . $article->headline . "</h1>";
-                        echo "<a href='" . PHBlog::getUrl("/page/edit/$article->id") . "' class='editPost'>edit</a>";
-                        echo "</article>";
-                    }
-                ?>
-            </div>
-        </td>
-    </tr>
-</table>
-
-<script type="text/javascript">
-    $(function() {
-        $("#user").hover(
-            function() {
-                $("#submenu").addClass("submenu");
-                $("#submenu").removeClass("submenu-hidden");
-            },
-            function () {
-                $("#submenu").addClass("submenu-hidden");
-                $("#submenu").removeClass("submenu");
-            }
-        );
+<div id="articles" class="dashboardContent">
+    <div>
+        <a href="<?php echo PHBlog::getUrl('/post/new'); ?>" id="new">New Post</a>
+    </div>
+    <?php
+        $articles = $data["articles"];    
+    
+        foreach ($articles as $article) {
+            echo "<article>";
+            echo "<h1>" . $article->headline . "</h1>";
+            echo "<a href='" . PHBlog::getUrl("/post/edit/$article->id") . "' class='editPost'>edit</a>";
+            echo "</article>";
+        }
+    ?>
+</div>
+<div id="pages" class="dashboard-hidden">
+    <div>
+        <a href="<?php echo PHBlog::getUrl('/page/new'); ?>" id="new">New Page</a>
+    </div>
+    <?php
+        $articles = $data["pages"];  
         
-        $("nav.dashboardMenu a").click(function(e) {
-            var category = $(e.target).text();
-            if (category == "Posts") {
-                $("#pages").addClass("dashboard-hidden");
-                $("#articles").removeClass("dashboard-hidden");
-            } else {
-                $("#articles").addClass("dashboard-hidden");
-                $("#pages").removeClass("dashboard-hidden");
-            }
-        });
-    });
-</script>
+        foreach ($articles as $article) {
+            echo "<article>";
+            echo "<h1>" . $article->headline . "</h1>";
+            echo "<a href='" . PHBlog::getUrl("/page/edit/$article->id") . "' class='editPost'>edit</a>";
+            echo "</article>";
+        }
+    ?>
+</div>

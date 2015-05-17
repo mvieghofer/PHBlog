@@ -5,6 +5,10 @@ class DashboardController extends Controller {
         parent::__construct();
     }
     
+    protected function renderView($view, $data = []) {
+        $this->view->renderDashboard($view, $data);
+    }
+    
     public function indexAction() {
         $data = [
             "articles" => Post::where('ispage', '=', 0)->get(),
