@@ -1,6 +1,3 @@
-    </div>
-    <footer>
-        &copy; 2015 Markus Vieghofer
-    </footer>
-</body>
-</html>
+<?php
+    require_once(realpath(dirname(__FILE__) . "/../footer.php"));
+?>
