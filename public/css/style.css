@@ -83,11 +83,6 @@ form#commentForm input, textarea {
     width: 0;
     height: 0;
 }
-   
-.dashboardContent {
-    width: auto;
-    height: auto;
-}
 
 /*
  * Login

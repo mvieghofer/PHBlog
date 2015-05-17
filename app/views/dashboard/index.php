@@ -1,4 +1,4 @@
-<div id="articles" class="dashboardContent">
+<div id="articles">
     <div>
         <a href="<?php echo PHBlog::getUrl('/post/new'); ?>" id="new">New Post</a>
     </div>
