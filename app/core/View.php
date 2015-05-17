@@ -12,6 +12,14 @@ class View {
     public function renderDashboard($template, $data) {
         renderDashboardView($template, $data);
     }
+    
+    public function renderWithoutNavigation($template, $data) {
+        renderWithoutNavigation($template, $data);
+    }
+    
+    public function renderLogin($template) {
+        renderLoginView($template);
+    }
 }
 
 ?>

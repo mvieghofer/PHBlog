@@ -45,7 +45,7 @@ class PostController extends Controller {
             'post' => $post,
             'returnPath' => '/post/save'
         ];
-        $this->view('post/edit', $data);
+        $this->showEditView($data);
     }
     
     public function newAction() {
@@ -55,7 +55,7 @@ class PostController extends Controller {
             'post' => $post,
             'returnPath' => '/post/save'
         ];
-        $this->view('post/edit', $data);
+        $this->showEditView($data);
     }
     
     public function saveAction() {
@@ -73,6 +73,13 @@ class PostController extends Controller {
         $post->ispage = $ispage;
         $post->save();
         return $post;
+    }
+    
+    private function showEditView($data) {
+        $viewPath = APP_PATH . '/views/post/edit.php';
+        if (file_exists($viewPath)) {
+            $this->view->renderWithoutNavigation($viewPath, $data);
+        }
     }
 }
 ?>

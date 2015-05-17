@@ -19,7 +19,7 @@ class PageController extends PostController {
             'post' => $post,
             'returnPath' => '/page/save'
         ];
-        $this->view('post/edit', $data);
+        $this->showEditView($data);
     }
     
     public function newAction() {
@@ -29,7 +29,7 @@ class PageController extends PostController {
             'post' => $post,
             'returnPath' => '/page/save'
         ];
-        $this->view('post/edit', $data);
+        $this->showEditView($data);
     }
     
     public function saveAction() {
