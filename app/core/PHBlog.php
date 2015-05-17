@@ -4,13 +4,13 @@ require_once(realpath(dirname(__FILE__) . "/../../resources/config.php"));
 require_once(DB_PATH);
     
 class PHBlog {
-    protected $controller = 'HomeController';
+    private $controller = 'HomeController';
     
-    protected $errorView = '404';
+    private $errorMethod = 'errorAction';
     
-    protected $method = 'indexAction';
+    private $method = 'indexAction';
     
-    protected $params = [];
+    private $params = [];
     
     public function __construct() {
         $url = $this->parseUrl();
@@ -21,28 +21,24 @@ class PHBlog {
                 $this->controller = $controllerName;
                 unset($url[0]);
             } else {
-                $this->controller = $this->errorView;
+                $this->method = $this->errorMethod;
             }
         }
     
         require_once($this->getControllerFileName($this->controller));
+    
+        $this->controller = new $this->controller;
         
-        if ($this->controller !== $this->errorView) {
-            $this->controller = new $this->controller;
-            
-            if (isset($url[1])) {
-                if (method_exists($this->controller, $url[1] . 'Action')) {
-                    $this->method = $url[1] . 'Action';
-                    unset($url[1]);
-                }
+        if ($this->method !== $this->errorMethod && isset($url[1])) {
+            if (method_exists($this->controller, $url[1] . 'Action')) {
+                $this->method = $url[1] . 'Action';
+                unset($url[1]);
             }
-            
-            $this->params = $url ? array_values($url) : [];
-            
-            call_user_func_array([$this->controller, $this->method], $this->params);
         }
         
+        $this->params = $url ? array_values($url) : [];
         
+        call_user_func_array([$this->controller, $this->method], $this->params);        
     }
     
     protected function parseUrl() {

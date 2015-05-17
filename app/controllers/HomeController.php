@@ -11,5 +11,9 @@ class HomeController extends Controller {
         
         $this->view('home/index', $articles);
     }
+    
+    public function errorAction() {
+        $this->view('404');
+    }
 }
 ?>
