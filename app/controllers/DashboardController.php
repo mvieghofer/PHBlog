@@ -1,6 +1,8 @@
 <?php
 class DashboardController extends Controller {
     
+    const cookieName = "login_cookie";
+    
     public function __construct() {
         parent::__construct();
     }
@@ -10,6 +12,11 @@ class DashboardController extends Controller {
     }
     
     public function indexAction() {
+        if (isset($_COOKIE[DashboardController::cookieName])) {
+            
+        } else {
+            parent::redirect('login');
+        }
         $data = [
             "articles" => Post::where('ispage', '=', 0)->get(),
             "pages" => Post::where('ispage', '=', 1)->get()

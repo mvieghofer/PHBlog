@@ -4,6 +4,6 @@
     
     class LoginCookie {
         public $userId;
-        public $userName;
+        public $key;
     }
 ?>
