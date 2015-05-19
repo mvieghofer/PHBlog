@@ -85,55 +85,6 @@ article {
 }
 
 /*
- * Login
- */
-#login {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 75%;
-}
-
-#login h1 {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#login p {
-    position: absolute;
-    top: 55px;
-    width: 100%;
-    text-align: center;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: rgb(255, 0, 0);
-}
-
-#loginForm {
-    position: absolute;
-    top: 150px;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#loginForm #submit {
-    background-color: #009B95;
-    border: 0;
-    color: #fff;
-    font-size: 1em;
-    float: right;
-}
-
-#loginForm input {
-    font-size: 1em;
-    border: 0;
-    margin-bottom: 5px;
-}
-
-/*
  * edit
  */
 #output {

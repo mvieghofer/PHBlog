@@ -61,5 +61,10 @@ class PHBlog {
         }
         return '/phblog' . $url;
     }
+    
+    public function isLoggedId($token) {
+        $user = User::where('token', '=', $token)->first();
+        return $user->remember_until >= new DateTime();
+    }
 }
 ?>

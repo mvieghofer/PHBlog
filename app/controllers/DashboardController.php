@@ -1,7 +1,6 @@
 <?php
+require_once('LoginController.php');
 class DashboardController extends Controller {
-    
-    const cookieName = "login_cookie";
     
     public function __construct() {
         parent::__construct();
@@ -12,7 +11,7 @@ class DashboardController extends Controller {
     }
     
     public function indexAction() {
-        if (isset($_COOKIE[DashboardController::cookieName])) {
+        if (isset($_COOKIE[LoginController::cookieName])) {
             
         } else {
             parent::redirect('login');

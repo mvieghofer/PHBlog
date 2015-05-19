@@ -8,18 +8,11 @@
     you'll only need to update it here.
 */
  
-$config = array(
-    "urls" => array(
-        "baseUrl" => "http://localhost:8888"
-    ),
-    "paths" => array(
-        "resources" => "/../resources",
-        "images" => array(
-            "content" => $_SERVER["DOCUMENT_ROOT"] . "/images/content",
-            "layout" => $_SERVER["DOCUMENT_ROOT"] . "/images/layout"
-        )
-    )
-);
+class Config {
+    public static $keys = [
+        "mailgun" => "key-c8698d4ff96ff3e48f0c0825e72c16c0"
+    ];
+}
  
 /*
     I will usually place the following in a bootstrap file or some type of environment

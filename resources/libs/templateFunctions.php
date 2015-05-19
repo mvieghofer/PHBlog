@@ -51,7 +51,7 @@
         require_once(TEMPLATES_PATH . "/edit/footer.php");
     }
     
-    function renderLoginView($contentFile) {
+    function renderLoginView($contentFile, $data) {
         require_once(TEMPLATES_PATH . "/login/header.php");
         echo '<div class="row">';
         

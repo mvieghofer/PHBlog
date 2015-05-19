@@ -17,8 +17,8 @@ class View {
         renderWithoutNavigation($template, $data);
     }
     
-    public function renderLogin($template) {
-        renderLoginView($template);
+    public function renderLogin($template, $data) {
+        renderLoginView($template, $data);
     }
 }
 

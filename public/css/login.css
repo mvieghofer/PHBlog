@@ -23,6 +23,11 @@ form button {
     float: right;
 }
 
+form input[type=checkbox] {
+    width: auto;
+    margin-right: 5px;
+}
+
 #login-options {
     text-align: center;
     margin-top: 25px;

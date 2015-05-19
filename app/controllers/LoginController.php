@@ -1,28 +1,41 @@
 <?php
+require_once(realpath(dirname(__FILE__) . "/../../resources/config.php"));
 
 class LoginController extends Controller {
+    
+    const cookieName = "login_cookie";
+    
     public function indexAction() {
-        $this->view('login/login');
-    }
-    
-    public function loginAction() {
-        if (!isset($_POST['login']) || !isset($_POST['password'])) {
-            parent::redirect('/login');
+        if (isset($_COOKIE[LoginController::cookieName])) {
+            parent::redirect('dashboard');
         }
         
-        $login = $_POST['login'];
-        $password = $_POST['password'];
-        
-        $user = User::where('username', '=', $login)->first();
-        if ($user != null && $user->password === $password) {
-            parent::redirect('/dashboard');
-        } else {
-            parent::redirect('/login?error=true');
+        $error = false;
+        if (isset($_POST['email']) && isset($_POST['password'])) {
+            $email = $_POST['email'];
+            
+            $user = User::where('username', '=', $email)->where('is_active', '=', '1')->first();
+            if ($user != null) {
+                //var_dump(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM));
+                $password = password_hash($_POST['password'], PASSWORD_BCRYPT, ["salt" => $user->salt]);
+                if ($user->password === $password) {
+                    $token = md5(uniqid(rand(), true));
+                    $user->token = $token;
+                    $user->remember = isset($_POST['remember']);
+                    $this->saveUser($user);
+                    parent::redirect('/dashboard');
+                } else {
+                    $error = true;
+                }
+            } else {
+                $error = true;
+            }
         }
-    }
-    
-    public function resetAction() {
-        $this->view('login/reset');    
+        $data = [];
+        if ($error) {
+            $data = ['errorText' => 'The username or password was not correct.'];
+        }
+        $this->view('login/login', $data);
     }
     
     public function registerAction() {
@@ -31,6 +44,21 @@ class LoginController extends Controller {
     
     protected function renderView($view, $data = []) {
         $this->view->renderLogin($view, $data);
+    }
+    
+    private function saveUser($user) {
+        $expirationDate = new DateTime();
+        $expirationDate->add(new DateInterval("PT24H"));
+        if ($user->remember) {
+            $expirationDate->add(new DateInterval('P6D'));
+        }
+        $user->remember_until = $expirationDate;
+        $user->save();
+        
+        $loginCookie = new LoginCookie();
+        $loginCookie->username = $user->username;
+        $loginCookie->token = $user->token;
+        setcookie(LoginController::cookieName, json_encode($loginCookie), $user->remember_until->getTimestamp());
     }
 }
 
