@@ -11,7 +11,7 @@ class DashboardController extends Controller {
     }
     
     public function indexAction() {
-        if (isset($_COOKIE[LoginController::cookieName])) {
+        if (isset($_COOKIE[Config::$loginCookieName])) {
             
         } else {
             parent::redirect('login');

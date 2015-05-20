@@ -2,11 +2,9 @@
 require_once(realpath(dirname(__FILE__) . "/../../resources/config.php"));
 
 class LoginController extends Controller {
-    
-    const cookieName = "login_cookie";
-    
+        
     public function indexAction() {
-        if (isset($_COOKIE[LoginController::cookieName])) {
+        if (isset($_COOKIE[Config::$loginCookieName])) {
             parent::redirect('dashboard');
         }
         
@@ -19,7 +17,7 @@ class LoginController extends Controller {
                 //var_dump(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM));
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT, ["salt" => $user->salt]);
                 if ($user->password === $password) {
-                    $token = md5(uniqid(rand(), true));
+                    $token = md5(uniqid($email, true));
                     $user->token = $token;
                     $user->remember = isset($_POST['remember']);
                     $this->saveUser($user);
@@ -38,10 +36,6 @@ class LoginController extends Controller {
         $this->view('login/login', $data);
     }
     
-    public function registerAction() {
-        $this->view('login/register');
-    }
-    
     protected function renderView($view, $data = []) {
         $this->view->renderLogin($view, $data);
     }
@@ -56,9 +50,8 @@ class LoginController extends Controller {
         $user->save();
         
         $loginCookie = new LoginCookie();
-        $loginCookie->username = $user->username;
         $loginCookie->token = $user->token;
-        setcookie(LoginController::cookieName, json_encode($loginCookie), $user->remember_until->getTimestamp());
+        setcookie(Config::$loginCookieName, json_encode($loginCookie), $user->remember_until->getTimestamp());
     }
 }
 

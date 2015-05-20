@@ -62,9 +62,9 @@ class PHBlog {
         return '/phblog' . $url;
     }
     
-    public function isLoggedId($token) {
-        $user = User::where('token', '=', $token)->first();
-        return $user->remember_until >= new DateTime();
+    public static function getAbsoluteUrl($url) {
+        $url = PHBlog::getUrl($url);
+        return Config::$baseUrl . $url;
     }
 }
 ?>

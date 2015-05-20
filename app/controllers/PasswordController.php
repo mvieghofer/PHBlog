@@ -2,8 +2,6 @@
 use Mailgun\Mailgun;
 class PasswordController extends Controller {
     
-    const cookieName = "login_cookie";
-    
     public function newAction($token = -1) {
         $error = false;
         $data = [];
@@ -56,7 +54,7 @@ class PasswordController extends Controller {
                 $userPasswordReset->token = $token;
                 $userPasswordReset->save();
                 
-                $url = "http://localhost/phblog/password/new/$token";
+                $url = PHBlog::getAbsoluteUrl("/password/new/$token");
                 $mg->sendMessage($domain, array(
                    'from' => 'phblog-password@devcouch.net',
                    'to' => $_POST['email'],

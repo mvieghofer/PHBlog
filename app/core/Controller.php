@@ -33,5 +33,14 @@ class Controller {
         $url = PHBlog::getUrl($url);
         header("Location: {$url}");
     }
+    
+    public function isLoggedId() {
+        if (isset($_COOKIE[Config::loginCookieName])) {
+            $loginCookie = json_decode($_COOKIE[Config::loginCookieName]);
+            $user = User::where('token', '=', $loginCookie->token)->first();
+            return $user->remember_until >= new DateTime();
+        }
+        return false;
+    }
 }
 ?>

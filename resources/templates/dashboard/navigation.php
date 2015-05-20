@@ -1,7 +1,9 @@
 <nav class="dashboardMenu">
     <ul>
+        <li><a href='<?php echo PHBlog::getUrl('/'); ?>'>Show Blog</a></li>
         <li><a href="#">Posts</a></li>
         <li><a href="#">Pages</a></li>
+        <li><a href='<?php echo PHBlog::getUrl('/logout') ?>'>Logout</a></li>
     </ul>            
 </nav>     
 

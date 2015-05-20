@@ -19,14 +19,14 @@
     <div id="login-options">
         <a href="<?php echo PHBlog::getUrl('/password/reset'); ?>">Forgot password</a>
         |
-        <a href="<?php echo PHBlog::getUrl('/login/register'); ?>">Register</a>
+        <a href="<?php echo PHBlog::getUrl('/register'); ?>">Register</a>
     </div>
 </div>
 
 <script type="text/javascript">
     $(function() {        
         $('#login-form').submit(function() {
-            if ($('#login').val() === "" || $('#password').val() === "") {
+            if ($('#email').val() === "" || $('#password').val() === "") {
                 $('#login-error').removeClass('hidden');
                 $('#login-error p').html('The username and password are both required fields.');
                 return false;
