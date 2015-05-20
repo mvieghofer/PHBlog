@@ -57,3 +57,11 @@ CREATE TABLE comments (
     PRIMARY KEY (id),
     FOREIGN KEY (post_id) REFERENCES posts(id)
 );
+
+CREATE TABLE pending_users (
+    user_id INTEGER NOT NULL,
+    token VARCHAR(32) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+)
