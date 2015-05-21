@@ -10,7 +10,7 @@ class RegisterController extends Controller {
             if (User::where('username', '=', $user->username)->count() > 0) {
                 $data['errorText'] = 'A user with this email address exists already';
             } else {
-                $user->salt = mcrypt_create_iv(22, MCRYPT_DEV_URANDOM);
+                $user->salt = $this->getSalt();
                 $user->password = password_hash($_POST['password'], PASSWORD_BCRYPT, ["salt" => $user->salt]);
                 $user->is_active = false;
                 if (isset($_POST['first'])) {
@@ -66,6 +66,16 @@ class RegisterController extends Controller {
     
     protected function renderView($view, $data = []) {
         $this->view->renderLogin($view, $data);
+    }
+    
+    private function getSalt() {
+        $characters = 'abcdefghijklmnopqrstuvwxyzABZDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $salt = '';
+        for ($i = 0; $i < 22; $i++) {
+             $salt .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        
+        return $salt;
     }
 }
 ?>
