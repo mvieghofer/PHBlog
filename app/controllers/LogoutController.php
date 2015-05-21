@@ -2,7 +2,7 @@
 
 class LogoutController extends Controller {
     public function indexAction() {
-        if (isset($_COOKIE[LoginController::cookieName])) {
+        if (isset($_COOKIE[Config::$loginCookieName])) {
             $loginCookie = json_decode($_COOKIE[Config::$loginCookieName]);
             $user = User::where('token', '=', $loginCookie->token)->first();
             if ($user != null) {
