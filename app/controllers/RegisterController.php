@@ -29,7 +29,7 @@ class RegisterController extends Controller {
                 $mg = new Mailgun(Config::$keys['mailgun']);
                 $domain = 'devcouch.net';
                 
-                $url = PHBLog::getAbsoluteUrl("/register/activate/$pendingUsers->token");
+                $url = Router::getAbsoluteUrl("/register/activate/$pendingUsers->token");
                 $username = " " . $user->first_name;
                 $mg->sendMessage($domain, array(
                    'from' => 'phblog-account@devcouch.net',

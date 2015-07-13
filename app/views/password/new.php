@@ -9,7 +9,7 @@
         ?>
         </p>
     </div>
-    <form action="<?php echo PHBlog::getUrl('/password/new'); ?>" method="post" id="password-form">
+    <form action="<?php echo Router::getUrl('/password/new'); ?>" method="post" id="password-form">
         <input type="hidden" name="token" value="<?php echo $data['token']; ?>" /><br />
         <input type="password" placeholder="Password" name="password" id="password" /><br />
         <input type="password" placeholder="Repeat Password" name="password_repeat" id="password_repeat" /><br />

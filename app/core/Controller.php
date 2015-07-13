@@ -30,7 +30,7 @@ class Controller {
     }
     
     public function redirect($url) {
-        $url = PHBlog::getUrl($url);
+        $url = Router::getUrl($url);
         header("Location: {$url}");
     }
     

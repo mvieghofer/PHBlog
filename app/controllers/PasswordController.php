@@ -30,7 +30,7 @@ class PasswordController extends Controller {
         }
         $data = ['token' => $token];
         if ($error) {
-            $data['errorText'] = "Sorry we could not reset your password. You could <a href='" . PHBlog::getUrl('/password/reset') . "'>try it again</a>.";
+            $data['errorText'] = "Sorry we could not reset your password. You could <a href='" . Router::getUrl('/password/reset') . "'>try it again</a>.";
         }
         $this->view('password/new', $data);
     }
@@ -54,7 +54,7 @@ class PasswordController extends Controller {
                 $userPasswordReset->token = $token;
                 $userPasswordReset->save();
                 
-                $url = PHBlog::getAbsoluteUrl("/password/new/$token");
+                $url = Router::getAbsoluteUrl("/password/new/$token");
                 $mg->sendMessage($domain, array(
                    'from' => 'phblog-password@devcouch.net',
                    'to' => $_POST['email'],

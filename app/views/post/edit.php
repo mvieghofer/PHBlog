@@ -4,7 +4,7 @@
 ?>
 <div class="row">
     <div class="col-xs-6">
-        <form action='<?php echo PHBlog::getUrl($data['returnPath']); ?>' method='post' id='editForm'>
+        <form action='<?php echo Router::getUrl($data['returnPath']); ?>' method='post' id='editForm'>
         <?php
             echo "<input type='hidden' name='id' value='$post->id'>";
         ?>
@@ -18,7 +18,7 @@
 <div id="formmenu-container" class="row">
     <div class="col-xs-12">
         <div id="formMenu">
-            <a href="<?php echo PHBlog::getUrl('/dashboard'); ?>">Cancel</a>
+            <a href="<?php echo Router::getUrl('/dashboard'); ?>">Cancel</a>
             <button type="submit" id="editform-submit">Submit</button>
         </div>
     </div>
@@ -48,7 +48,7 @@ $(function() {
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <?php
-    echo "<script type='text/javascript' src='" . PHBlog::getUrl('/public/javascript/markdown/lib/markdown.js') . "'></script>";
+    echo "<script type='text/javascript' src='" . Router::getUrl('/public/javascript/markdown/lib/markdown.js') . "'></script>";
 ?>
 
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">

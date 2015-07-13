@@ -59,8 +59,8 @@ class PostController extends Controller {
     }
     
     public function saveAction() {
-        $post = savePost(false);
-        parent::redirect('/post/edit/' . $article->id);
+        $post = $this->savePost(false);
+        parent::redirect('/post/edit/' . $post->id);
     }
     
     protected function savePost($ispage) {
@@ -75,7 +75,7 @@ class PostController extends Controller {
         return $post;
     }
     
-    private function showEditView($data) {
+    protected function showEditView($data) {
         $viewPath = APP_PATH . '/views/post/edit.php';
         if (file_exists($viewPath)) {
             $this->view->renderWithoutNavigation($viewPath, $data);

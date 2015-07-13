@@ -1,7 +1,7 @@
 <?php
     require_once(realpath(dirname(__FILE__) . "/../config.php"));
     
-    function renderContentView($contentFile, $data) {        
+    function renderContentView($contentFile, $data) {
         require_once(TEMPLATES_PATH . "/main/header.php");
         echo '<div class="row">';
         echo '<div id="nav" class="col-xs-3">';

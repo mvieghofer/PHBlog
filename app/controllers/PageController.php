@@ -33,8 +33,8 @@ class PageController extends PostController {
     }
     
     public function saveAction() {
-        $post = savePost(true);
-        parent::redirect('/page/edit/' . $article->id);
+        $post = $this->savePost(true);
+        parent::redirect('/page/edit/' . $post->id);
     }
 }
 ?>

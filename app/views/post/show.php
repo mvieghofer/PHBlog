@@ -11,7 +11,7 @@
         echo "<p>" . $comment->comment . "</p>";
         echo "</div>";
     }
-    echo "<form id='commentForm' action='" . PHBlog::getUrl('/post/addComment') . "' method='post'>";
+    echo "<form id='commentForm' action='" . Router::getUrl('/post/addComment') . "' method='post'>";
     echo "<input type='hidden' name='postid' value='$data->id'></input>";
     echo "<input type='input' id='commentator' name='commentator' placeholder='Name'></input><br />";
     echo "<textarea name='comment' placeholder='Tell me your opinion'></textarea>";

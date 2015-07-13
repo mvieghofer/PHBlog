@@ -3,7 +3,7 @@
     <div id="error-container" class="error hidden">
         <p></p>
     </div>
-    <form action="<?php echo PHBlog::getUrl('/password/reset'); ?>" method="post" id="login-form">
+    <form action="<?php echo Router::getUrl('/password/reset'); ?>" method="post" id="login-form">
         <input type="text" placeholder="Email" name="email" id="email" /><br />
         <button type="submit">Reset password</button>
     </form>
