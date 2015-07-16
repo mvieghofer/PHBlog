@@ -18,47 +18,43 @@ class Router {
                 
     }
     
-    public function add($uri, $function) {
-        $uri = str_replace('/', '\/', $uri);
-        $this->urlMap[$uri] = $function;
-    }
-    
     public function run() {
+        $method = $_SERVER['REQUEST_METHOD'];
         $url = '/';
         if (isset($_GET['url'])) {
             $url .=  $_GET['url'];
         }
         foreach ($this->urlMap as $key => $value) {
-            if (preg_match("/^$key$/", $url)) {
-                $this->mapUrl($url, $key, $value);
+            if (preg_match("/^$key$/", $url) && isset($value) && isset($value[$method])) {
+                $this->mapUrl($url, $key, $value[$method]);
             }
         }
-        /*if (isset($url[0])) {
-            
-            $controllerName = $this->getControllerName($url[0]);
-            if (file_exists($this->getControllerFileName($controllerName))) {
-                $this->controller = $controllerName;
-                unset($url[0]);
-            } else {
-                $this->method = $this->errorMethod;
-            }
-        }
+    }
     
-        require_once($this->getControllerFileName($this->controller));
-        
-        $this->controller = new $this->controller;
-        
-        if ($this->method !== $this->errorMethod && isset($url[1])) {
-            if (method_exists($this->controller, $url[1] . 'Action')) {
-                $this->method = $url[1] . 'Action';
-                
-                unset($url[1]);
-            }
+    public function get($uri, $function) {
+        $this->add($uri, $function, ['GET']);
+    }
+    
+    public function post($uri, $function) {
+        $this->add($uri, $function, ['POST']);
+    }
+    
+    public function put($uri, $function) {
+        $this->add($uri, $function, ['PUT']);
+    }
+    
+    public function delete($uri, $function) {
+        $this->add($uri, $function, ['DELETE']);
+    }
+    
+    public function add($uri, $function, array $methods) {
+        $uri = str_replace('/', '\/', $uri);
+        if (!isset($this->urlMap[$uri]) || empty($this->urlMap[$uri])) {
+            $this->urlMap[$uri] = [];
         }
-        
-        $this->params = $url ? array_values($url) : [];
-        
-        call_user_func_array([$this->controller, $this->method], $this->params);*/
+        foreach($methods as $method) {
+            $this->urlMap[$uri][$method] = $function;    
+        }
     }
     
     protected function getControllerFileName($controllerName) {

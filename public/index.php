@@ -6,30 +6,37 @@
     
     $router = new Router();
     
-    $router->add('/', 'HomeController#indexAction');
-    $router->add('/404', 'HomeController#errorAction');
+    $router->get('/', 'HomeController#indexAction');
+    $router->get('/404', 'HomeController#errorAction');
     
-    $router->add('/login', 'LoginController#indexAction');
+    $router->get('/login', 'LoginController#indexAction');
     
-    $router->add('/logout', 'LogoutController#indexAction');
+    $router->get('/logout', 'LogoutController#indexAction');
     
-    $router->add('/dashboard', 'DashboardController#indexAction');
+    $router->get('/dashboard', 'DashboardController#indexAction');
     
-    $router->add('/page/\d+', 'PageController#showAction');
-    $router->add('/page/new', 'PageController#newAction');
-    $router->add('/page/save', 'PageController#saveAction');
-    $router->add('/page/edit/\d+', 'PageController#editAction');
+    $router->get('/page/\d+', 'PageController#showAction');
+    $router->get('/page/new', 'PageController#newAction');
+    $router->get('/page/save', 'PageController#saveAction');
+    $router->get('/page/edit/\d+', 'PageController#editAction');
     
-    $router->add('/post/\d+', 'PostController#showAction');
-    $router->add('/post/new', 'PostController#newAction');
-    $router->add('/post/save', 'PostController#saveAction');
-    $router->add('/post/edit/\d+', 'PostController#editAction');
+    $router->get('/post/\d+', 'PostController#showAction');
+    $router->get('/post/new', 'PostController#newAction');
+    $router->get('/post/save', 'PostController#saveAction');
+    $router->get('/post/edit/\d+', 'PostController#editAction');
     
-    $router->add('/password/new/*.*', 'PasswordController#newAction');
-    $router->add('/password/reset', 'PasswordController#resetAction');
+    $router->get('/password/new/*.*', 'PasswordController#newAction');
+    $router->get('/password/reset', 'PasswordController#resetAction');
     
-    $router->add('/register', 'RegisterController#indexAction');
-    $router->add('/register/activate/.+', 'RegisterController#activateAction');
+    $router->get('/register', 'RegisterController#indexAction');
+    $router->get('/register/activate/.+', 'RegisterController#activateAction');
+    
+    $router->get('/api/test', 'RESTController#get');
+    $router->post('/api/test', 'RESTController#post');
+    $router->put('/api/test', 'RESTController#put');
+    $router->delete('/api/test', 'RESTController#delete');
+    
+    $router->add('/api/test/multi', 'RESTController#multi', ['GET', 'POST', 'PUT', 'DELETE']);
     
     $router->run();
 ?>
