@@ -42,13 +42,8 @@
     $router->post('/register', 'RegisterController#indexAction');
     
     $router->get('/register/activate/.+', 'RegisterController#activateAction');
-    
-    $router->get('/api/test', 'RESTController#get');
-    $router->post('/api/test', 'RESTController#post');
-    $router->put('/api/test', 'RESTController#put');
-    $router->delete('/api/test', 'RESTController#delete');
-    
-    $router->add('/api/test/multi', 'RESTController#multi', ['GET', 'POST', 'PUT', 'DELETE']);
+
+    $router->add('/api/post/*.*', 'RESTController#indexAction', ['GET', 'POST', 'PUT', 'DELETE']);
     
     $router->run();
 ?>
