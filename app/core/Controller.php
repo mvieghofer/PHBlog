@@ -29,6 +29,12 @@ class Controller {
         $this->view->renderContent($view, $data);
     }
     
+    protected function updateCSRFToken($path = '/') {
+        $token = md5(uniqid());
+        setcookie(Config::$csrfTokenCookieName, $token, time() + 60 * 60 * 24, $path);
+        return $token;
+    }
+    
     public function redirect($url) {
         $url = Router::getUrl($url);
         header("Location: {$url}");

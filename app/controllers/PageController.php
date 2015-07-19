@@ -15,20 +15,14 @@ class PageController extends PostController {
     
     public function editAction($postid = -1) {
         $post = Post::where('id', '=', $postid)->where('ispage', '=', true)->first();
-        $data = [
-            'post' => $post,
-            'returnPath' => '/page/save'
-        ];
+        $data = $this->getData($post, '/page/save');
         $this->showEditView($data);
     }
     
     public function newAction() {
         $post = new Post();
         $post->ispage = true;
-        $data = [
-            'post' => $post,
-            'returnPath' => '/page/save'
-        ];
+        $data = $this->getData($post, '/page/save');
         $this->showEditView($data);
     }
     

@@ -11,6 +11,7 @@ class LogoutController extends Controller {
                 $user->save();
             }
             setcookie(Config::$loginCookieName, "", time() - 3600);
+            setcookie(Config::$csrfTokenCookieName, "", time() - 3600);
             parent::redirect("/");
         }
     }

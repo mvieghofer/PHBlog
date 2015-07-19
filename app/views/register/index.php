@@ -10,6 +10,7 @@
         </p>
     </div>
     <form action="<?php echo Router::getUrl('/register'); ?>" method="post" id="register-form">
+        <input type="hidden" name="csrftoken" value="<?php echo $data['csrftoken'] ?>"><br />
         <input type="text" placeholder="Email" name="email" id="email" /><br />
         <input type="text" placeholder="First Name" name="first" id="first" /><br />
         <input type="text" placeholder="Last Name" name="last" id="last" /><br />

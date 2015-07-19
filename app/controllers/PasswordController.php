@@ -2,10 +2,19 @@
 use Mailgun\Mailgun;
 class PasswordController extends Controller {
     
-    public function newAction($token = -1) {
+    public function showNewAction($token) {
+        $data = [];
+        $data['csrftoken'] = $this->updateCSRFToken();
+        $data['token'] = $token;
+        $this->view('password/new', $data);
+    }
+    
+    public function newAction() {
         $error = false;
         $data = [];
-        if (isset($_POST['token']) && isset($_POST['password']) && isset($_POST['password_repeat'])) {
+        if (strcmp($_POST['csrftoken'], $_COOKIE[Config::$csrfTokenCookieName]) !== 0) {
+            $error = true;
+        } else if (isset($_POST['token']) && isset($_POST['password']) && isset($_POST['password_repeat'])) {
             $password = $_POST['password'];
             $password_repeat = $_POST['password_repeat'];
             if ($password == $password_repeat) {
@@ -28,6 +37,7 @@ class PasswordController extends Controller {
                 $data['errorText'] = "The passwords didn't match.";
             }
         }
+        $data['csrftoken'] = $this->updateCSRFToken();
         $data = ['token' => $token];
         if ($error) {
             $data['errorText'] = "Sorry we could not reset your password. You could <a href='" . Router::getUrl('/password/reset') . "'>try it again</a>.";
@@ -36,7 +46,10 @@ class PasswordController extends Controller {
     }
     
     public function resetAction() {
-        if (isset($_POST['email'])) {
+        $data = [];
+        if (strcmp($_POST['csrftoken'], $_COOKIE[Config::$csrfTokenCookieName]) !== 0) {
+            $data['errorText'] = "Sorry, your request couldn't be processed.";
+        } else if (isset($_POST['email'])) {
             $email = $_POST['email'];
             $user = User::where('username', '=', $email)->first();
             if ($user != null) {
@@ -64,7 +77,14 @@ class PasswordController extends Controller {
                 parent::redirect("/login");
             }
         }
-        $this->view('password/reset');    
+        $data['csrftoken'] = $this->updateCSRFToken();
+        $this->view('password/reset', $data);    
+    }
+    
+    public function showResetAction() {
+        $data = [];
+        $data['csrftoken'] = $this->updateCSRFToken();
+        $this->view('password/reset', $data);    
     }
     
     protected function renderView($view, $data = []) {

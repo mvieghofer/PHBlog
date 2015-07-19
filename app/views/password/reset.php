@@ -1,9 +1,10 @@
 <div id="form-container">
     <h1>Reset Password</h1>
-    <div id="error-container" class="error hidden">
-        <p></p>
+    <div id="error-container" class="error <?php if (!isset($data['errorText'])) { echo 'hidden'; } ?>">
+        <p><?php echo $data['errorText']; ?></p>
     </div>
     <form action="<?php echo Router::getUrl('/password/reset'); ?>" method="post" id="login-form">
+        <input type="hidden" name="csrftoken" value="<?php echo $data['csrftoken'] ?>" /><br />
         <input type="text" placeholder="Email" name="email" id="email" /><br />
         <button type="submit">Reset password</button>
     </form>

@@ -1,10 +1,15 @@
 <?php
     $parsedown = new Parsedown();
     $post = $data['post'];
+    if (isset($data['errorText'])) {
+        $errorText = $data['errorText'];
+        echo "<div class='row'><div class='error'><p>$errorText</p></div></div>";
+    }
 ?>
 <div class="row">
     <div class="col-xs-6">
         <form action='<?php echo Router::getUrl($data['returnPath']); ?>' method='post' id='editForm'>
+            <input type="hidden" name="csrftoken" value="<?php echo $data['csrftoken'] ?>" /><br />
         <?php
             echo "<input type='hidden' name='id' value='$post->id'>";
         ?>

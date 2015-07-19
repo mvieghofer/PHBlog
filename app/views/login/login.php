@@ -10,6 +10,7 @@
         </p>
     </div>
     <form action="<?php echo Router::getUrl('/login'); ?>" method="post" id="login-form">
+        <input type="hidden" name="csrftoken" value="<?php echo $data['csrftoken'] ?>" />
         <input type="text" placeholder="Email" name="email" id="email" /><br />
         <input type="password" placeholder="Password" name="password" id="password" /><br />
         <input type="checkbox" name="remember" id="remember" /><label for="remember"><span>Remember Me</span></label>

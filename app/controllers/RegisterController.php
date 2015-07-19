@@ -3,7 +3,7 @@
 use Mailgun\Mailgun;
 class RegisterController extends Controller {
     public function indexAction() {
-        $data = [];
+        $data = $this->getData();
         if (isset($_POST['email']) && isset($_POST['password'])) {
             $user = new User();
             $user->username = $_POST['email'];
@@ -42,8 +42,13 @@ class RegisterController extends Controller {
         $this->view('register/index', $data);
     }
     
+    public function showIndexAction() {
+        $data = $this->getData();
+        $this->view('register/index', $data);
+    }
+    
     public function activateAction($token) {
-        $data = [];
+        $data = $this->getData();
         $pendingUser = PendingUsers::where('token', '=', $token)->first();
         if ($pendingUser != null) {
             $user = User::find($pendingUser->user_id);
@@ -76,6 +81,13 @@ class RegisterController extends Controller {
         }
         
         return $salt;
+    }
+    
+    private function getData() {
+        $data = [
+            'csrftoken' => $this->updateCSRFToken('/register')
+        ];
+        return $data;
     }
 }
 ?>

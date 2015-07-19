@@ -4,11 +4,18 @@ require_once(realpath(dirname(__FILE__) . "/../../resources/config.php"));
 class LoginController extends Controller {
         
     public function indexAction() {
-        if (isset($_COOKIE[Config::$loginCookieName])) {
-            parent::redirect('dashboard');
-        }
+        $data = [];
+        $data['csrftoken'] = $this->updateCSRFToken();
         
+        $this->view('login/login', $data);
+    }
+    
+    public function loginAction() {
         $error = false;
+        if (strcmp($_POST['csrftoken'], $_COOKIE[Config::$csrfTokenCookieName]) !== 0) {
+            $error = true;
+            $data['csrftoken'] = $this->updateCSRFToken();
+        }
         if (isset($_POST['email']) && isset($_POST['password'])) {
             $email = $_POST['email'];
             

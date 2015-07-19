@@ -33,16 +33,6 @@ form input[type=checkbox] {
     margin-top: 25px;
 }
 
-.error {
-    text-align: center;
-}
-
-.error p {
-    display: inline-block;
-    padding: 5px;
-    color: rgb(255, 0, 0);
-}
-
 .hidden {
     visibility: collapse;
 }
